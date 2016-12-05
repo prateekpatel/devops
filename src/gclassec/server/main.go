@@ -6,7 +6,7 @@ import (
 
     // Third party packages
     "github.com/julienschmidt/httprouter"
-    "TestDb/controllers"
+    "gclassec/controllers"
 )
 
 func main() {
