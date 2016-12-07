@@ -27,5 +27,5 @@ func main() {
     r.GET("/dbaas/pricing", uc.GetPrice)
 
     // Fire up the server
-    http.ListenAndServe("localhost:3000", r)
+    http.ListenAndServe("localhost:9009", r)
 }
