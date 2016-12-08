@@ -7,7 +7,7 @@ import (
     // Third party packages
     "github.com/julienschmidt/httprouter"
 
-    "CloudApp/controllers"
+    "gclassec/controllers"
 )
 
 func main() {

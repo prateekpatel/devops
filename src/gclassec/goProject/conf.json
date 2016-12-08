@@ -1,0 +1,8 @@
+{
+    "dbtype": "mysql",
+    "dbname": "cloud_assessment",
+    "dbusername": "root",
+    "dbpassword": "root",
+    "dbhostname": "110.110.110.170",
+    "dbport": "3306"
+}
