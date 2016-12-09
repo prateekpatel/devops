@@ -2,7 +2,7 @@ package controllers
 
 import (
 	_ "github.com/lib/pq"
-	_ "go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
 	"github.com/jinzhu/gorm"
 	"encoding/json"
@@ -124,7 +124,7 @@ func (uc InstController) GetDetails(w http.ResponseWriter, r *http.Request, p ht
 	if err != nil {
 		panic(err)
 	}
-	db.Close()
+	//db.Close()
 }
 
 /*
@@ -144,7 +144,7 @@ func (uc InstController) GetDetailsById(w http.ResponseWriter, r *http.Request, 
 	if err != nil {
 		panic(err)
 	}
-	db.Close()
+	//db.Close()
 }
 
 /*
@@ -171,7 +171,7 @@ func (uc InstController) GetDB(w http.ResponseWriter, r *http.Request, p httprou
 	if err != nil {
 		panic(err)
 	}
-	db.Close()
+	//db.Close()
 }
 
 /*
@@ -189,5 +189,5 @@ func (uc InstController) GetPrice(w http.ResponseWriter, r *http.Request, p http
 	if err != nil {
 		panic(err)
 	}
-	db.Close()
+	//db.Close()
 }
