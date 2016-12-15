@@ -3,12 +3,12 @@ package controllers
 import (
 	_ "github.com/lib/pq"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/julienschmidt/httprouter"
 	"github.com/jinzhu/gorm"
 	"encoding/json"
 	"net/http"
 	"gclassec/goProject"
 	"strings"
+	"github.com/gorilla/mux"
 )
 type (
     // InstController represents the controller for operating on the User resource
@@ -105,7 +105,7 @@ type vw_rds struct {
 /*
 Get instance details
 */
-func (uc InstController) GetDetails(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc InstController) GetDetails(w http.ResponseWriter, r *http.Request) {
 	dbObj := []rds_dynamic{}
 
 	db.SingularTable(true)
@@ -130,10 +130,13 @@ func (uc InstController) GetDetails(w http.ResponseWriter, r *http.Request, p ht
 /*
 Get details of instance for the given id
 */
-func (uc InstController) GetDetailsById(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc InstController) GetDetailsById(w http.ResponseWriter, r *http.Request) {
 	dbObj := []rds_dynamic{}
 
-	id := p.ByName("id")
+	//id := p.ByName("id")
+
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	db.SingularTable(true)
 
@@ -150,7 +153,7 @@ func (uc InstController) GetDetailsById(w http.ResponseWriter, r *http.Request, 
 /*
 Get details of instances based on CPU Utilization and DB Connections
 */
-func (uc InstController) GetDB(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc InstController) GetDB(w http.ResponseWriter, r *http.Request) {
 	dbObj := []rds_dynamic{}
 
 	queryValue1 := r.URL.Query().Get("CPUUtilization_max")
@@ -177,7 +180,7 @@ func (uc InstController) GetDB(w http.ResponseWriter, r *http.Request, p httprou
 /*
 Get pricing depending on instance type
 */
-func (uc InstController) GetPrice(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc InstController) GetPrice(w http.ResponseWriter, r *http.Request) {
 	dbObj := []vw_rds{}
 
 	db.SingularTable(true)

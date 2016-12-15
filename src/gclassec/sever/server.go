@@ -5,27 +5,26 @@ import (
     "net/http"
 
     // Third party packages
-    "github.com/julienschmidt/httprouter"
-
     "gclassec/controllers"
+    "github.com/gorilla/mux"
 )
 
 func main() {
     // Instantiate a new router
-    r := httprouter.New()
+    mx := mux.NewRouter()
 
     // Get a InstController instance
     uc := controllers.NewInstController()
 
     // Get a instance resource
-    r.GET("/dbaas/list", uc.GetDetails)
+    mx.HandleFunc("/dbaas/list", uc.GetDetails).Methods("GET")
 
-    r.GET("/dbaas/list/:id", uc.GetDetailsById)
+    mx.HandleFunc("/dbaas/list/{id}", uc.GetDetailsById).Methods("GET")
 
-    r.GET("/dbaas/get", uc.GetDB)
+    mx.HandleFunc("/dbaas/get", uc.GetDB).Methods("GET")
 
-    r.GET("/dbaas/pricing", uc.GetPrice)
+    mx.HandleFunc("/dbaas/pricing", uc.GetPrice).Methods("GET")
 
     // Fire up the server
-    http.ListenAndServe("localhost:9009", r)
+    http.ListenAndServe("localhost:9009", mx)
 }
