@@ -119,6 +119,8 @@ func (uc InstController) GetDetails(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.NewEncoder(w).Encode(db.Find(&dbObj))
 
+	w.WriteHeader(http.StatusOK)
+
 	// Ping function checks the database connectivity
 	err = db.DB().Ping()
 	if err != nil {
@@ -141,6 +143,8 @@ func (uc InstController) GetDetailsById(w http.ResponseWriter, r *http.Request) 
 	db.SingularTable(true)
 
 	_ = json.NewEncoder(w).Encode(db.Find(&dbObj, "DBInstanceIdentifier = ?", id))
+
+	w.WriteHeader(http.StatusOK)
 
 	// Ping function checks the database connectivity
 	err = db.DB().Ping()
@@ -169,6 +173,8 @@ func (uc InstController) GetDB(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.NewEncoder(w).Encode(db.Where("CPUUtilization_max < ? AND DatabaseConnections_max = ?", queryValue1, queryValue2).Find(&dbObj))
 
+	w.WriteHeader(http.StatusOK)
+
 	// Ping function checks the database connectivity
 	err = db.DB().Ping()
 	if err != nil {
@@ -186,6 +192,8 @@ func (uc InstController) GetPrice(w http.ResponseWriter, r *http.Request) {
 	db.SingularTable(true)
 
 	_ = json.NewEncoder(w).Encode(db.Find(&dbObj))
+
+	w.WriteHeader(http.StatusOK)
 
 	// Ping function checks the database connectivity
 	err = db.DB().Ping()
