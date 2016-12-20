@@ -1,0 +1,8 @@
+ {
+    "dbtype": "mysql",
+    "dbname": "GO-DB-Testing",
+    "dbusername": "root",
+    "dbpassword": "root",
+    "dbhostname": "110.110.110.170",
+    "dbport": "3306"
+}
