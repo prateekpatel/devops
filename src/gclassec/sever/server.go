@@ -5,9 +5,12 @@ import (
     "net/http"
 
     // Third party packages
-    "gclassec/controllers"
+    "gclassec/Controller"
     "github.com/gorilla/mux"
     "fmt"
+
+    "gclassec/openstackController"
+    "GitProgram/src/gclassec/validator"
 )
 
 func main() {
@@ -15,12 +18,13 @@ func main() {
     mx := mux.NewRouter()
 
     // Get a InstController instance
-    uc := controllers.NewInstController()
+    uc :=Controller.NewUserController()
 
-    mx.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        w.WriteHeader(http.StatusNotFound)
-        w.Write([]byte(fmt.Sprintf("%s URL is Not Valid Please Enter Valid URL\n", r.URL)))
-    })
+
+    op := openstackController.UserController{}
+
+
+    mx.NotFoundHandler = http.HandlerFunc(validate.ValidateWrongURL)
 
     // Get a instance resource
     mx.HandleFunc("/dbaas/list", uc.GetDetails).Methods("GET")  // 'http://localhost:9009/dbaas/list'
@@ -30,6 +34,8 @@ func main() {
     mx.HandleFunc("/dbaas/get", uc.GetDB).Methods("GET")  // 'http://localhost:9009/dbaas/get?CPUUtilization_max=5&DatabaseConnections_max=0'
 
     mx.HandleFunc("/dbaas/pricing", uc.GetPrice).Methods("GET")  // 'http://localhost:9009/dbaas/pricing'
+
+    mx.HandleFunc("/dbaas/openstackDetail", op.GetDetailsOpenstack).Methods("GET")
 
     //using handle
     http.Handle("/", mx)

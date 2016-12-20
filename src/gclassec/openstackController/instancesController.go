@@ -4,7 +4,7 @@ package openstackController
 import(
 	"strings"
 	"github.com/jinzhu/gorm"
-	"github.com/julienschmidt/httprouter"
+
 
 
 	"net/http"
@@ -35,7 +35,7 @@ func NewUserController() *UserController {
 
 		var db,err  = gorm.Open(dbtype, c)
 
-func (uc UserController) GetDetailsOpenstack(w http.ResponseWriter, r *http.Request, p httprouter.Params){
+func (uc UserController) GetDetailsOpenstack(w http.ResponseWriter, r *http.Request){
 
 	tx := db.Begin()
 	db.SingularTable(true)

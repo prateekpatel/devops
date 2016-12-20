@@ -3,17 +3,20 @@ package Controller
 
 import (
 	"net/http"
-        "github.com/julienschmidt/httprouter"
-	_ "github.com/lib/pq"
+
+	//_ "github.com/lib/pq"
 
 	_ "go-sql-driver/mysql"
 	"gclassec/goClient"
 
 	"strings"
-	"github.com/jinzhu/gorm"
+	//"github.com/jinzhu/gorm"
 	"gclassec/table_structs"
-	"fmt"
+
 	"encoding/json"
+	"github.com/gorilla/mux"
+	//"src/github.com/jinzhu/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 type (
@@ -40,20 +43,15 @@ var dbcredentials = goClient.Configurtion()
 		var db,err  = gorm.Open(dbtype, c)
 
 
-func (uc UserController) GetDetailsById(w http.ResponseWriter, r *http.Request, p httprouter.Params){
-
-	tx := db.Begin()
+func (uc UserController) GetDetailsById(w http.ResponseWriter, r *http.Request) {
 	dbObj := []structs.Rds_dynamic{}
-id := p.ByName("id")
+
+	//id := p.ByName("id")
+
+	vars := mux.Vars(r)
+	id := vars["id"]
+
 	db.SingularTable(true)
-
-	err := db.Find(&dbObj, "DBInstanceIdentifier = ?", id).Error
-	fmt.Println(err)
-	if err != nil {
-
-		tx.Rollback()
-	}
-
 
 	_ = json.NewEncoder(w).Encode(db.Find(&dbObj, "DBInstanceIdentifier = ?", id))
 
@@ -62,12 +60,10 @@ id := p.ByName("id")
 	if err != nil {
 		panic(err)
 	}
-	tx.Commit()
+	//db.Close()
 }
 
-
-
-func (uc UserController) GetDB(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc UserController) GetDB(w http.ResponseWriter, r *http.Request) {
 	tx := db.Begin()
 	dbObj := []structs.Rds_dynamic{}
 
@@ -100,7 +96,7 @@ if err != nil{
 
 
 
-func (uc UserController) GetPrice(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (uc UserController) GetPrice(w http.ResponseWriter, r *http.Request) {
 	tx := db.Begin()
 	dbObj := []structs.Vw_rds{}
 
@@ -122,7 +118,7 @@ if err != nil{
 	tx.Commit()
 }
 
-func (uc UserController) GetDetails(w http.ResponseWriter, r *http.Request, p httprouter.Params){
+func (uc UserController) GetDetails(w http.ResponseWriter, r *http.Request){
 
 	tx := db.Begin()
 	db.SingularTable(true)

@@ -6,9 +6,9 @@ import (
 	"github.com/jinzhu/gorm"
 	"encoding/json"
 	"net/http"
-	"gclassec/goProject"
 	"strings"
 	"github.com/gorilla/mux"
+	"gclassec/goClient"
 )
 type (
     // InstController represents the controller for operating on the User resource
