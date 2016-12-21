@@ -6,7 +6,7 @@ import (
 
 	//_ "github.com/lib/pq"
 
-	_ "go-sql-driver/mysql"
+	//_ "go-sql-driver/mysql"
 	"gclassec/goClient"
 
 	"strings"

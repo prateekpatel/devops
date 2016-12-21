@@ -4,11 +4,7 @@ package openstackController
 import(
 	"strings"
 	"github.com/jinzhu/gorm"
-
-
-
 	"net/http"
-
 	"encoding/json"
 	"gclassec/opClient"
 	"gclassec/openstackInstance"
