@@ -8,7 +8,10 @@ import (
     "github.com/gorilla/mux"
     "fmt"
     "gclassec/openstackController"
+<<<<<<< HEAD
     //"GitProgram/src/gclassec/validator"
+=======
+>>>>>>> 642043858044df1f382c847bbd98812c14fde101
     "gclassec/validation"
 )
 
@@ -21,6 +24,10 @@ func main() {
 
     op := openstackController.UserController{}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 642043858044df1f382c847bbd98812c14fde101
     mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 
     // Get a instance resource

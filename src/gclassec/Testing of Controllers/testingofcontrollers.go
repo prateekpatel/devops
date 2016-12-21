@@ -47,6 +47,14 @@ func main() {
 		Send().
 		ExpectStatus(400)
 		//ExpectContent("A string which won't be found")
+	frisby.Create("display the openstack details").
+		Get("http://localhost:9009/dbaas/openstackDetail").
+		Send().
+		ExpectStatus(200)
 
+	frisby.Create("display the openstack details (Wich fails)").
+		Get("http://localhost:9009/dbaas/openstackDetail").
+		Send().
+		ExpectStatus(400)
 	frisby.Global.PrintReport()
 }

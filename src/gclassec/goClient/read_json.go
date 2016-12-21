@@ -16,7 +16,11 @@ type Configuration struct {
 }
 
 func Configurtion() Configuration{
+<<<<<<< HEAD
 	file, _ := os.Open("C:/goclassec/conf.json")
+=======
+	file, _ := os.Open("C:/Git/goclassec/conf.json")
+>>>>>>> 642043858044df1f382c847bbd98812c14fde101
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)

@@ -3,6 +3,10 @@ package Controller
 import (
 	"net/http"
 	//_ "github.com/lib/pq"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 642043858044df1f382c847bbd98812c14fde101
 	_ "github.com/go-sql-driver/mysql"
 	"gclassec/goClient"
 	"strings"
