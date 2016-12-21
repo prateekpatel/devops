@@ -1,18 +1,13 @@
 package Controller
 
-
 import (
 	"net/http"
-
 	//_ "github.com/lib/pq"
-
-	_ "go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"gclassec/goClient"
-
 	"strings"
 	//"github.com/jinzhu/gorm"
 	"gclassec/table_structs"
-
 	"encoding/json"
 	"github.com/gorilla/mux"
 	//"src/github.com/jinzhu/gorm"
@@ -29,19 +24,18 @@ func NewUserController() *UserController {
 
 
 var dbcredentials = goClient.Configurtion()
-	var dbtype string = dbcredentials.Dbtype
-		var dbname  string = dbcredentials.Dbname
-		var dbusername string = dbcredentials.Dbusername
-		var dbpassword string = dbcredentials.Dbpassword
-		var dbhostname string = dbcredentials.Dbhostname
-		var dbport string = dbcredentials.Dbport
+var dbtype string = dbcredentials.Dbtype
+var dbname  string = dbcredentials.Dbname
+var dbusername string = dbcredentials.Dbusername
+var dbpassword string = dbcredentials.Dbpassword
+var dbhostname string = dbcredentials.Dbhostname
+var dbport string = dbcredentials.Dbport
 
-		var b []string = []string{dbusername,":",dbpassword,"@tcp","(",dbhostname,":",dbport,")","/",dbname}
+var b []string = []string{dbusername,":",dbpassword,"@tcp","(",dbhostname,":",dbport,")","/",dbname}
 
-		var c string = (strings.Join(b,""))
+var c string = (strings.Join(b,""))
 
-		var db,err  = gorm.Open(dbtype, c)
-
+var db,err  = gorm.Open(dbtype, c)
 
 func (uc UserController) GetDetailsById(w http.ResponseWriter, r *http.Request) {
 	dbObj := []structs.Rds_dynamic{}
@@ -76,7 +70,7 @@ func (uc UserController) GetDB(w http.ResponseWriter, r *http.Request) {
 	db.SingularTable(true)
 
 	err := db.Where("CPUUtilization_max < ? AND DatabaseConnections_max = ?", queryValue1, queryValue2).Find(&dbObj).Error
-if err != nil{
+	if err != nil{
 		tx.Rollback()
 	}
 
@@ -103,7 +97,7 @@ func (uc UserController) GetPrice(w http.ResponseWriter, r *http.Request) {
 
 	db.SingularTable(true)
 	err := db.Find(&dbObj).Error
-if err != nil{
+	if err != nil{
 		tx.Rollback()
 	}
 

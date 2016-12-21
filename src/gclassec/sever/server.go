@@ -3,14 +3,13 @@ package main
 import (
     // Standard library packages
     "net/http"
-
     // Third party packages
     "gclassec/Controller"
     "github.com/gorilla/mux"
     "fmt"
-
     "gclassec/openstackController"
-    "GitProgram/src/gclassec/validator"
+    //"GitProgram/src/gclassec/validator"
+    "gclassec/validation"
 )
 
 func main() {
@@ -20,11 +19,9 @@ func main() {
     // Get a InstController instance
     uc :=Controller.NewUserController()
 
-
     op := openstackController.UserController{}
 
-
-    mx.NotFoundHandler = http.HandlerFunc(validate.ValidateWrongURL)
+    mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 
     // Get a instance resource
     mx.HandleFunc("/dbaas/list", uc.GetDetails).Methods("GET")  // 'http://localhost:9009/dbaas/list'
