@@ -12,6 +12,8 @@ import (
 	"github.com/gorilla/mux"
 	//"src/github.com/jinzhu/gorm"
 	"github.com/jinzhu/gorm"
+
+
 )
 
 type (
@@ -30,7 +32,6 @@ var dbusername string = dbcredentials.Dbusername
 var dbpassword string = dbcredentials.Dbpassword
 var dbhostname string = dbcredentials.Dbhostname
 var dbport string = dbcredentials.Dbport
-
 var b []string = []string{dbusername,":",dbpassword,"@tcp","(",dbhostname,":",dbport,")","/",dbname}
 
 var c string = (strings.Join(b,""))
@@ -134,3 +135,4 @@ func (uc UserController) GetDetails(w http.ResponseWriter, r *http.Request){
 
 	tx.Commit()
 }
+

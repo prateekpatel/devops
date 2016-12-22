@@ -14,19 +14,19 @@
 //    License for the specific language governing permissions and limitations
 //    under the License.
 
-package main
+package goClientCompute
+
+
 import (
 	"fmt"
 	"time"
-	"git.openstack.org/openstack/golang-client.git/openstack"
+	"gclassec/goClientCompute/openstack"
 	"os"
 	"encoding/json"
 	"net/http"
 
-	"git.openstack.org/openstack/golang-client.git/compute"
+	"gclassec/goClientCompute/compute"
 
-
-	"strings"
 )
 type Configuration struct {
     Host    string
@@ -38,9 +38,9 @@ type Configuration struct {
     ImageRegion string
 }
 
-func Compute() []compute.DetailResponse {
+func ComputeFunc() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("C:/Project/Go/src/git.openstack.org/openstack/golang-client.git/examples/config.json")
+	file, _ := os.Open("E:\\Git\\goclassec\\computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
@@ -102,6 +102,7 @@ func Compute() []compute.DetailResponse {
 	return computeDetails
 }
 
+/*
 func main() {
 	obj := Compute()
 	out, err := json.Marshal(obj)
@@ -126,4 +127,4 @@ func main() {
 			fmt.Println(tempVar1[j])
 		}
 	}
-}
+}*/

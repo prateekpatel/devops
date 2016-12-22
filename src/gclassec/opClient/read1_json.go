@@ -6,25 +6,18 @@ import (
 	"fmt"
 )
 
+
 type Configuration struct {
     Dbtype    string
     Dbname   string
-    Dbusername   string
+	Dbusername   string
     Dbpassword   string
-    Dbhostname   string
-    Dbport   string
+	Dbhostname   string
+	Dbport   string
 }
 
 func Configurtion() Configuration{
-	//s,_:= os.Getwd()
-<<<<<<< HEAD
-	file, _ := os.Open("C:/goclassec/conf1.json")
-=======
-
-
-
-	file, _ := os.Open("C:/Git/goclassec/conf1.json")
->>>>>>> 642043858044df1f382c847bbd98812c14fde101
+	file, _ := os.Open("E:\\Git\\goclassec\\conf1.json")
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)

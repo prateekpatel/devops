@@ -9,12 +9,13 @@ import (
     "fmt"
     "gclassec/openstackController"
     "gclassec/validation"
+    "gclassec/OpenstackInsert"
 )
 
 func main() {
-    // Instantiate a new router
     mx := mux.NewRouter()
 
+    OpenstackInsert.InsertInstances()
     // Get a InstController instance
     uc :=Controller.NewUserController()
 
