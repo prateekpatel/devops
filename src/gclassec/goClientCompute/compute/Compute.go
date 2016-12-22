@@ -24,14 +24,12 @@ package compute
 import (
 	"encoding/json"
 	"errors"
-
 	"io/ioutil"
-
+	"git.openstack.org/openstack/golang-client.git/openstack"
 	"net/http"
+	"git.openstack.org/openstack/golang-client.git/util"
 	"net/url"
-	"gclassec/goClientCompute/openstack"
-	"gclassec/goClientCompute/util"
-	//"fmt"
+	"fmt"
 )
 // Service is a client service that can make
 // requests against a OpenStack version 2 Compute service.
@@ -48,39 +46,88 @@ type Service struct {
 // an instance for a non detailed query
 type Response struct {
 	Network   			string `json:"network"`
-	diskConfig			string `json:"diskConfig"`
-	availability_zone      		string `json:"availability_zone"`
-	host              		string `json:"host"`
-	instance_name            	string `json:"instance_name"`
-	power_state   			int64  `json:"power_state"`
+	DiskConfig			string `json:"diskConfig"`
+	Host              		string `json:"host"`
+	Instance_name            	string `json:"instance_name"`
+	Power_state   			int64  `json:"power_state"`
 	vm_state	      		string `json:"vm_state"`
-	flavor				string `json:"flavor"`
-	hostId		      		string `json:"hostId"`
-	id	       			string `json:"id"`
-	image	            		string `json:"image"`
-	key_name            		string `json:"key_name"`
-	name	       			string `json:"name"`
-	volumes_attached            	string `json:"volumes_attached"`
-	security_groups	            	string `json:"security_groups"`
-	status            		string `json:"status"`
-	tenant_id   			string `json:"tenant_id"`
+	Flavor				string `json:"flavor"`
+	HostId		      		string `json:"hostId"`
+	Image	            		string `json:"image"`
+	Key_name            		string `json:"key_name"`
+	Name	       			string `json:"name"`
+	Volumes_attached            	string `json:"volumes_attached"`
+	Security_groups	            	string `json:"security_groups"`
+	Status            		string `json:"status"`
+	Tenant_id   			string `json:"tenant_id"`
 }
 // DetailResponse is a structure for all properties of
 // an instance for a detailed query
 type DetailResponse struct {
 	Name	       			string `json:"name"`
-	progress            		int64  `json:"progress"`
-	security_groups	            	string `json:"security_groups"`
-	status            		string `json:"status"`
-	tenant_id   			string `json:"tenant_id"`
-	updated				string `json:"updated"`
-	user_id		      		string `json:"user_id"`
+	ID	       			string `json:"id"`
+	Status            		string `json:"status"`
+	Availability_zone      		string `json:"OS-EXT-AZ:availability_zone"`
+	Created				string `json:"created"`
+	Flavor				Flavor `json:"flavor"`
+	Addresses			address `json:"addresses"`
+	Security_groups 		[]security_groups `json:"security_groups"`
+	Key_name           		string `json:"key_name"`
+	Image           		Image  `json:"image"`
+	Tenant_id   			string `json:"tenant_id"`
+	Updated				string `json:"updated"`
+	User_id		      		string `json:"user_id"`
+	HostId				string `json:"hostId"`
+	Task_state   			string `json:"OS-EXT-STS:task_state"`
+	Vm_state			string `json:"OS-EXT-STS:vm_state"`
+	Launched_at		      	string `json:"OS-SRV-USG:launched_at"`
+	Volumes_attached   		[]Volume `json:"os-extended-volumes:volumes_attached"`
+	Progress            		int64  `json:"progress"`
+	IPV4				string	`json:"accessIPv4"`
+	IPV6				string	`json:"accessIPv6"`
+	Power_State			int64	`json:"OS-EXT-STS:power_state"`
+	ConfigDrive			string	`json:"config_drive"`
+	DiskConfig			string	`json:"OS-DCF:diskConfig"`
+}
+type Volume struct{
+	Vol	string `json:"os-extended-volumes:volumes_attached"`
+}
+type Image struct{
+	ID	string `json:"id"`
+}
+type Flavor struct{
+	ID	string `json:"id"`
+}
+type security_groups struct{
+	Name	string `json:"name"`
+}
+type address struct{
+	Mac_addr	string	`json:"OS-EXT-IPS-MAC:mac_addr"`
+	Version		string	`json:"version"`
+	Addr		string	`json:"addr"`
+	Type		string	`json:"OS-EXT-IPS:type"`
 }
 // QueryParameters is a structure that
 // contains the filter, sort, and paging parameters for
 // an instance or computedetail query.
 type QueryParameters struct {
-	instance_name           string
+	Id			int64
+	Name			string
+	InstanceID		string
+	Status 			string
+	AvailabilityZone	string
+	CreationTime		string
+	Flavor			string
+	FlavorID		int64
+	RAM			string
+	VCPU 			string
+	Storage 		string
+	IPAddress		string
+	SecurityGroup		string
+	KeyPairName		string
+	ImageName		string
+	Volumes			string
+	InsertionDate		string
 }
 // SortDirection of the sort, ascending or descending.
 type SortDirection string
@@ -115,7 +162,7 @@ func (computeService Service) QueryInstances(queryParameters *QueryParameters) (
 		return nil, err
 	}
 
-	return computeContainer.Instances, nil
+	return computeContainer.Servers, nil
 }
 
 // QueryImagesDetail will issue a get request with the specified QueryParameters to retrieve the list of
@@ -127,7 +174,7 @@ func (computeService Service) QueryInstancesDetail(queryParameters *QueryParamet
 		return nil, err
 	}
 
-	return computeDetailContainer.Instances, nil
+	return computeDetailContainer.Servers, nil
 }
 
 func (computeService Service) queryInstances(includeDetails bool, computeResponseContainer interface{}, queryParameters *QueryParameters) error {
@@ -135,16 +182,18 @@ func (computeService Service) queryInstances(includeDetails bool, computeRespons
 	if includeDetails {
 		urlPostFix = urlPostFix + "/detail"
 	}
-
+	fmt.Println(urlPostFix)
 	reqURL, err := buildQueryURL(computeService, queryParameters, urlPostFix)
-	//fmt.Printf("***********************", reqURL)
 	if err != nil {
 		return err
 	}
 
+	fmt.Println("cghvgjvgjgjvgj",reqURL)
+
 	var headers http.Header = http.Header{}
 	headers.Set("Accept", "application/json")
 	resp, err := computeService.Session.Get(reqURL.String(), nil, &headers)
+	fmt.Println("********************",headers)
 	if err != nil {
 		return err
 	}
@@ -155,6 +204,8 @@ func (computeService Service) queryInstances(includeDetails bool, computeRespons
 	}
 
 	rbody, err := ioutil.ReadAll(resp.Body)
+	fmt.Println("response body printng.")
+	fmt.Println(rbody)
 	if err != nil {
 		return errors.New("aaa")
 	}
@@ -172,8 +223,8 @@ func buildQueryURL(computeService Service, queryParameters *QueryParameters, com
 
 	if queryParameters != nil {
 		values := url.Values{}
-		if queryParameters.instance_name != "" {
-			values.Set("instance_name", queryParameters.instance_name)
+		if queryParameters.Name != "" {
+			values.Set("instance_name", queryParameters.Name)
 		}
 		if len(values) > 0 {
 			reqURL.RawQuery = values.Encode()
@@ -185,9 +236,9 @@ func buildQueryURL(computeService Service, queryParameters *QueryParameters, com
 }
 
 type computeDetailResponse struct {
-	Instances []DetailResponse `json:"servers"`
+	Servers []DetailResponse `json:"servers"`
 }
 
 type computeResponse struct {
-	Instances []Response `json:"servers"`
+	Servers []Response `json:"servers"`
 }
