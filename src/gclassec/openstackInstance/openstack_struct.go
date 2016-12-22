@@ -1,10 +1,10 @@
 package openstackInstance
 
 type Instances struct{
-	Id int 			`gorm:"column:id"`
-	Name string 		`gorm:"column:Name"`
+	//Id int 			`gorm:"column:id"`
+	Name string 		`gorm:"column:name"`
 	InstanceID string 	`gorm:"column:InstanceID"`
-	Status string 		`gorm:"column:Status"`
+	Status string 		`gorm:"column:status"`
 	AvailabilityZone string `gorm:"column:AvailabilityZone"`
 	CreationTime string 	`gorm:"column:CreationTime"`
 	Flavor string 		`gorm:"column:Flavor"`

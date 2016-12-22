@@ -27,6 +27,7 @@ import (
 
 	"gclassec/goClientCompute/compute"
 
+	"strings"
 )
 type Configuration struct {
     Host    string
@@ -40,7 +41,7 @@ type Configuration struct {
 
 func ComputeFunc() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("E:\\Git\\goclassec\\computeVM.json")
+	file, _ := os.Open("C:\\Chaitrali\\Git\\goclassec\\computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
@@ -66,6 +67,7 @@ func ComputeFunc() []compute.DetailResponse {
 	fmt.Println(auth)
 	// Find the endpoint for the Nova Compute service.
 	url, err := auth.GetEndpoint("compute", "")
+	url = strings.Replace(url,"compute", config.Container ,1)
 	if url == "" || err != nil {
 		panic("EndPoint Not Found.")
 		panic(err)

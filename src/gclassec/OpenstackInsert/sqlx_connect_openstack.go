@@ -33,7 +33,7 @@ func InsertInstances(){
 	//println(examples.ComputeFunc())
 	computeDetails:= goClientCompute.ComputeFunc()
 	for _, element := range computeDetails {
-		println(element.Name,element.ID,element.Status,element.Progress)
+		//println(element.Name,element.ID,element.Status,element.Progress)
 		/*user :=	openstackInstance.Instances{Name:element.Name,InstanceID:element.ID,Status:element.Status,AvailabilityZone:element.Availability_zone,CreationTime:element.Created,
 		Volumes:element.Volumes_attached,KeyPairName:element.Key_name}*/
 
