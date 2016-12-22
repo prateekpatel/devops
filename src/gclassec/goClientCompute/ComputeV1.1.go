@@ -18,11 +18,12 @@ package main
 import (
 	"fmt"
 	"time"
-	"git.openstack.org/openstack/golang-client.git/openstack"
 	"os"
 	"encoding/json"
 	"net/http"
-	"Test/Service"
+	"gclassec/goClientCompute/compute"
+	"gclassec/goClientCompute/openstack"
+	"strings"
 )
 type Configuration struct {
     Host    string
@@ -36,7 +37,7 @@ type Configuration struct {
 
 func main() {
 	//config := getConfig()
-	file, _ := os.Open("C:/Git/goclassec/compute.json")
+	file, _ := os.Open("C:/Chaitrali/Git/goclassec/computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
@@ -52,6 +53,8 @@ func main() {
 		Password:    config.Password,
 	}
 	auth, err := openstack.DoAuthRequest(creds)
+
+	//fmt.Printf("**** Thia is an AUTH Token ***** ::: ", auth)
 	if err != nil {
 		panicString := fmt.Sprint("There was an error authenticating:", err)
 		panic(panicString)
@@ -61,7 +64,9 @@ func main() {
 	}
 	fmt.Println(auth)
 	// Find the endpoint for the Nova Compute service.
+
 	url, err := auth.GetEndpoint("compute", "")
+
 	if url == "" || err != nil {
 		panic("EndPoint Not Found.")
 		panic(err)
@@ -72,6 +77,7 @@ func main() {
 		panicString := fmt.Sprint("Error creating new Session:", err)
 		panic(panicString)
 	}
+	url = strings.Replace(url,"controller",config.Container,1)
 	fmt.Println(url)
 	computeService := compute.Service{
 		Session: *sess,

@@ -53,7 +53,7 @@ func (s AuthToken) GetEndpoint(serviceType string, regionName string) (string, e
 
 	// Parse service catalog
 	for _, v := range s.Access.ServiceCatalog {
-		ep, err := v.GetEndpoint(serviceType, "public", regionName)
+		ep, err := v.GetEndpoint(serviceType, "internal", regionName)
 		if err == nil {
 			return ep, nil
 		}

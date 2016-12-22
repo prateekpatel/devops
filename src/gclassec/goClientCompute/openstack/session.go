@@ -26,9 +26,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-
-	"git.openstack.org/openstack/golang-client.git/util"
 	"fmt"
+	"gclassec/goClientCompute/util"
 )
 
 var Debug = new(bool)

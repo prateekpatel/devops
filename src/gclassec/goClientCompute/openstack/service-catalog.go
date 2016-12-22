@@ -53,13 +53,19 @@ func (sce ServiceCatalogEntry) GetEndpoint(
 				// Translate passed interface types
 				sc_int := strings.ToLower(interfaceType)
 				if sc_int == "public" || sc_int == "publicurl" {
-					return r.PublicURL, nil
+					//fmt.Printf("\n\n Public PublicURL :::",r.PublicURL)
+					url := strings.Replace(r.PublicURL,"controller","110.110.110.5",1)
+					return url, nil
 				}
 				if sc_int == "admin" || sc_int == "adminurl" {
-					return r.AdminURL, nil
+					//fmt.Printf("\n\n Admin PublicURL :::",r.PublicURL)
+					url := strings.Replace(r.AdminURL,"controller","110.110.110.5",1)
+					return url, nil
 				}
 				if sc_int == "internal" || sc_int == "internalURL" {
-					return r.InternalURL, nil
+					//fmt.Printf("\n\n Internal PublicURL :::",r.PublicURL)
+					url := strings.Replace(r.InternalURL,"controller","110.110.110.5",1)
+					return url, nil
 				}
 			}
 		}

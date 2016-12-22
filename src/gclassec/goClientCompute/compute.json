@@ -1,9 +1,0 @@
-{
-	"Host": "http://controller:5000/v2.0",
-	"Username": "ankurtiwari",
-	"Password": "atmecs@123",
-	"ProjectID": "99e1e2d5093446f1b5ae11939272c2df",
-	"ProjectName": "HPE",
- 	"Container": "I♡HPHelion",
-	"ImageRegion": ""
-}

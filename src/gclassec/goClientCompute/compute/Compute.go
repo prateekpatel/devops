@@ -24,12 +24,14 @@ package compute
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
+
 	"io/ioutil"
-	"git.openstack.org/openstack/golang-client.git/openstack"
+
 	"net/http"
-	"git.openstack.org/openstack/golang-client.git/util"
 	"net/url"
+	"gclassec/goClientCompute/openstack"
+	"gclassec/goClientCompute/util"
+	//"fmt"
 )
 // Service is a client service that can make
 // requests against a OpenStack version 2 Compute service.
@@ -66,29 +68,7 @@ type Response struct {
 // DetailResponse is a structure for all properties of
 // an instance for a detailed query
 type DetailResponse struct {
-	Network   			string `json:"network"`
-	diskConfig			string `json:"diskConfig"`
-	availability_zone      		string `json:"availability_zone"`
-	host              		string `json:"host"`
-	hypervisor_hostname            	string `json:"hypervisor_hostname"`
-	instance_name            	string `json:"instance_name"`
-	power_state   			int64  `json:"power_state"`
-	task_state			string `json:"task_state"`
-	vm_state	      		string `json:"vm_state"`
-	launched_at	       		string `json:"launched_at"`
-	terminated_at            	string `json:"terminated_at"`
-	accessIPv4            		string `json:"accessIPv4"`
-	accessIPv6	            	string `json:"accessIPv6"`
-	config_drive            	string `json:"config_drive"`
-	created   			string `json:"created"`
-	flavor				string `json:"flavor"`
-	hostId		      		string `json:"hostId"`
-	id	       			string `json:"id"`
-	image	            		string `json:"image"`
-	key_name            		string `json:"key_name"`
-	metadata	      		string `json:"metadata"`
-	name	       			string `json:"name"`
-	volumes_attached            	string `json:"volumes_attached"`
+	Name	       			string `json:"name"`
 	progress            		int64  `json:"progress"`
 	security_groups	            	string `json:"security_groups"`
 	status            		string `json:"status"`
@@ -157,6 +137,7 @@ func (computeService Service) queryInstances(includeDetails bool, computeRespons
 	}
 
 	reqURL, err := buildQueryURL(computeService, queryParameters, urlPostFix)
+	//fmt.Printf("***********************", reqURL)
 	if err != nil {
 		return err
 	}
@@ -204,9 +185,9 @@ func buildQueryURL(computeService Service, queryParameters *QueryParameters, com
 }
 
 type computeDetailResponse struct {
-	Instances []DetailResponse `json:"instances"`
+	Instances []DetailResponse `json:"servers"`
 }
 
 type computeResponse struct {
-	Instances []Response `json:"instances"`
+	Instances []Response `json:"servers"`
 }
