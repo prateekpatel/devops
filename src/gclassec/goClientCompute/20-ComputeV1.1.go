@@ -41,7 +41,7 @@ type Configuration struct {
 
 func ComputeFunc() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("C:\\Chaitrali\\Git\\goclassec\\computeVM.json")
+	file, _ := os.Open("/root/goclassec/computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)

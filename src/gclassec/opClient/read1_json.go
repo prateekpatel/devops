@@ -17,7 +17,7 @@ type Configuration struct {
 }
 
 func Configurtion() Configuration{
-	file, _ := os.Open("C:\\Chaitrali\\Git\\goclassec\\conf1.json")
+	file, _ := os.Open("/root/goclassec/conf1.json")
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)
