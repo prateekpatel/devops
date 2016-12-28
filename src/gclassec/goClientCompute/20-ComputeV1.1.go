@@ -15,8 +15,6 @@
 //    under the License.
 
 package goClientCompute
-
-
 import (
 	"fmt"
 	"time"
@@ -24,10 +22,10 @@ import (
 	"os"
 	"encoding/json"
 	"net/http"
-
+	"gclassec/goClientCompute/flavor"
 	"gclassec/goClientCompute/compute"
-
 	"strings"
+
 )
 type Configuration struct {
     Host    string
@@ -39,9 +37,9 @@ type Configuration struct {
     ImageRegion string
 }
 
-func ComputeFunc() []compute.DetailResponse {
+func Compute() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("/root/goclassec/computeVM.json")
+	file, _ := os.Open("C:/Git/goclassec/computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
@@ -67,7 +65,6 @@ func ComputeFunc() []compute.DetailResponse {
 	fmt.Println(auth)
 	// Find the endpoint for the Nova Compute service.
 	url, err := auth.GetEndpoint("compute", "")
-	url = strings.Replace(url,"compute", config.Container ,1)
 	if url == "" || err != nil {
 		panic("EndPoint Not Found.")
 		panic(err)
@@ -104,9 +101,28 @@ func ComputeFunc() []compute.DetailResponse {
 	return computeDetails
 }
 
-/*
-func main() {
-	obj := Compute()
+func FinalCompute() []compute.DetailResponse{
+	var flvObj []flavor.DetailResponse
+	flvObj = flavor.Flavor()
+	fmt.Println("&**********Showing FLVOBJ&************")
+	fmt.Println(flvObj)
+	fmt.Println("*********************")
+	fmt.Println("flvObj.FlavorID::", flvObj[1].FlavorID)
+
+	var obj []compute.DetailResponse
+	obj = Compute()
+	fmt.Println("77778888899999", obj[1].Flavor.FlavorID)
+	for i:=0; i<len(obj); i++{
+		tempFID :=obj[i].Flavor.FlavorID
+		for j:=0; j<len(flvObj); j++{
+			if tempFID==flvObj[j].FlavorID{
+				obj[i].Flavor.Name=flvObj[j].Name
+				obj[i].Flavor.Disk=flvObj[j].Disk
+				obj[i].Flavor.RAM=flvObj[j].RAM
+				obj[i].Flavor.VCPU=flvObj[j].VCPU
+			}
+		}
+	}
 	out, err := json.Marshal(obj)
 	if err != nil {
         	panic (err)
@@ -129,4 +145,6 @@ func main() {
 			fmt.Println(tempVar1[j])
 		}
 	}
-}*/
+	fmt.Println("Object",obj)
+	return obj
+}

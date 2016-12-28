@@ -30,6 +30,7 @@ import (
 	"gclassec/goClientCompute/util"
 	"net/url"
 	"fmt"
+	"gclassec/goClientCompute/flavor"
 )
 // Service is a client service that can make
 // requests against a OpenStack version 2 Compute service.
@@ -69,7 +70,7 @@ type DetailResponse struct {
 	Status            		string `json:"status"`
 	Availability_zone      		string `json:"OS-EXT-AZ:availability_zone"`
 	Created				string `json:"created"`
-	Flavor				Flavor `json:"flavor"`
+	Flavor				flavor.DetailResponse `json:"flavor"`
 	Addresses			address `json:"addresses"`
 	Security_groups 		[]security_groups `json:"security_groups"`
 	Key_name           		string `json:"key_name"`
@@ -95,9 +96,9 @@ type Volume struct{
 type Image struct{
 	ID	string `json:"id"`
 }
-type Flavor struct{
+/*type Flavor struct{
 	ID	string `json:"id"`
-}
+}*/
 type security_groups struct{
 	Name	string `json:"name"`
 }
@@ -117,7 +118,7 @@ type QueryParameters struct {
 	Status 			string
 	AvailabilityZone	string
 	CreationTime		string
-	Flavor			string
+	Flavor			[]flavor.DetailResponse
 	FlavorID		int64
 	RAM			string
 	VCPU 			string
