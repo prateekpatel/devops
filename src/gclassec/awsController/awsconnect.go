@@ -1,19 +1,14 @@
-package Controller
+package awsController
 
 import (
 	"net/http"
-	//_ "github.com/lib/pq"
 	_ "github.com/go-sql-driver/mysql"
-	"gclassec/goClient"
+	"gclassec/readawsconf"
 	"strings"
-	//"github.com/jinzhu/gorm"
-	"gclassec/table_structs"
 	"encoding/json"
 	"github.com/gorilla/mux"
-	//"src/github.com/jinzhu/gorm"
 	"github.com/jinzhu/gorm"
-
-
+	"gclassec/awsstructs"
 )
 
 type (
@@ -25,7 +20,7 @@ func NewUserController() *UserController {
 }
 
 
-var dbcredentials = goClient.Configurtion()
+var dbcredentials = readawsconf.Configurtion()
 var dbtype string = dbcredentials.Dbtype
 var dbname  string = dbcredentials.Dbname
 var dbusername string = dbcredentials.Dbusername
@@ -39,7 +34,7 @@ var c string = (strings.Join(b,""))
 var db,err  = gorm.Open(dbtype, c)
 
 func (uc UserController) GetDetailsById(w http.ResponseWriter, r *http.Request) {
-	dbObj := []structs.Rds_dynamic{}
+	dbObj := []awsstructs.Rds_dynamic{}
 
 	//id := p.ByName("id")
 
@@ -60,7 +55,7 @@ func (uc UserController) GetDetailsById(w http.ResponseWriter, r *http.Request) 
 
 func (uc UserController) GetDB(w http.ResponseWriter, r *http.Request) {
 	tx := db.Begin()
-	dbObj := []structs.Rds_dynamic{}
+	dbObj := []awsstructs.Rds_dynamic{}
 
 	queryValue1 := r.URL.Query().Get("CPUUtilization_max")
 
@@ -93,7 +88,7 @@ func (uc UserController) GetDB(w http.ResponseWriter, r *http.Request) {
 
 func (uc UserController) GetPrice(w http.ResponseWriter, r *http.Request) {
 	tx := db.Begin()
-	dbObj := []structs.Vw_rds{}
+	dbObj := []awsstructs.Vw_rds{}
 
 
 	db.SingularTable(true)
@@ -118,7 +113,7 @@ func (uc UserController) GetDetails(w http.ResponseWriter, r *http.Request){
 	tx := db.Begin()
 	db.SingularTable(true)
 
-	rds_dynamic := []structs.Rds_dynamic{}
+	rds_dynamic := []awsstructs.Rds_dynamic{}
 
 	err := db.Find(&rds_dynamic).Error
 

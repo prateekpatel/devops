@@ -1,12 +1,14 @@
-package openstackController
+package openstackcontroller
 
 import(
 	"strings"
 	"github.com/jinzhu/gorm"
 	"net/http"
 	"encoding/json"
-	"gclassec/opClient"
+
 	"gclassec/openstackInstance"
+	"gclassec/readopenstackconf"
+
 )
 type (
     // UserController represents the controller for operating on the User resource
@@ -16,7 +18,7 @@ func NewUserController() *UserController {
     return &UserController{}
 }
 
-var dbcredentials1 = opClient.Configurtion()
+var dbcredentials1 = readopenstackconf.Configurtion()
 var dbtype string = dbcredentials1.Dbtype
 var dbname  string = dbcredentials1.Dbname
 var dbusername string = dbcredentials1.Dbusername

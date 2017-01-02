@@ -4,22 +4,23 @@ import (
     // Standard library packages
     "net/http"
     // Third party packages
-    "gclassec/Controller"
+    "gclassec/awsController"
     "github.com/gorilla/mux"
     "fmt"
-    "gclassec/openstackController"
+    "gclassec/openstackcontroller"
     "gclassec/validation"
-    "gclassec/OpenstackInsert"
+    "gclassec/openstackinsert"
+
 )
 
 func main() {
     mx := mux.NewRouter()
 
-    OpenstackInsert.InsertInstances()
+    openstackinsert.InsertInstances()
     // Get a InstController instance
-    uc :=Controller.NewUserController()
+    uc := awsController.NewUserController()
 
-    op := openstackController.UserController{}
+    op := openstackcontroller.NewUserController()
 
     mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 

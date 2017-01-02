@@ -1,8 +1,8 @@
-package OpenstackInsert
+package openstackinsert
 
 import (
 
-	"gclassec/opClient"
+	"gclassec/readopenstackconf"
 	"strings"
 	"github.com/jinzhu/gorm"
 	"gclassec/goClientCompute"
@@ -16,7 +16,7 @@ func NewUserController() *UserController {
     return &UserController{}
 }
 
-var dbcredentials = opClient.Configurtion()
+var dbcredentials = readopenstackconf.Configurtion()
 var dbtype string = dbcredentials.Dbtype
 var dbname  string = dbcredentials.Dbname
 var dbusername string = dbcredentials.Dbusername

@@ -1,11 +1,10 @@
-package opClient
+package readawsconf
 
 import (
 	"os"
 	"encoding/json"
 	"fmt"
 )
-
 
 type Configuration struct {
     Dbtype    string
@@ -17,7 +16,7 @@ type Configuration struct {
 }
 
 func Configurtion() Configuration{
-	file, _ := os.Open("C:\\Git\\goclassec\\conf1.json")
+	file, _ := os.Open("C:\\Git\\goclassec\\conf.json")
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)
@@ -27,3 +26,4 @@ func Configurtion() Configuration{
 
 	return configuration
 }
+
