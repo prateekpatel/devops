@@ -5,8 +5,8 @@ import (
 	"gclassec/readopenstackconf"
 	"strings"
 	"github.com/jinzhu/gorm"
-	"gclassec/goClientCompute"
 	"gclassec/openstackInstance"
+	"gclassec/goclientcompute"
 )
 type (
     // UserController represents the controller for operating on the User resource
@@ -31,7 +31,7 @@ var db,err  = gorm.Open(dbtype, c)
 
 func InsertInstances(){
 	//println(examples.ComputeFunc())
-	computeDetails:= goClientCompute.FinalCompute()
+	computeDetails:= goclientcompute.FinalCompute()
 	for _, element := range computeDetails {
 		//println(element.Name,element.ID,element.Status,element.Progress)
 		/*user :=	openstackInstance.Instances{Name:element.Name,InstanceID:element.ID,Status:element.Status,AvailabilityZone:element.Availability_zone,CreationTime:element.Created,

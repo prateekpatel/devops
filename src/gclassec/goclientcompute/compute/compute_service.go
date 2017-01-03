@@ -30,7 +30,7 @@ import (
 	"git.openstack.org/openstack/golang-client.git/util"
 	"net/url"
 	"fmt"
-	"git.openstack.org/openstack/golang-client.git/flavor"
+	"gclassec/goclientcompute/flavor"
 )
 // Service is a client service that can make
 // requests against a OpenStack version 2 Compute service.

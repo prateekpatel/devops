@@ -19,7 +19,7 @@ type Configuration struct {
 
 func Flavor() []DetailResponse{
 	//config := getConfig()
-	file, _ := os.Open("C:/Project/Go/src/git.openstack.org/openstack/golang-client.git/examples/config.json")
+	file, _ := os.Open("C:/Git/goclassec/computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
