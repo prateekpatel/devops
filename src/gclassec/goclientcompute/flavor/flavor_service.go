@@ -3,9 +3,9 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"gclassec/goClientCompute/openstack"
+	"git.openstack.org/openstack/golang-client.git/openstack"
 	"net/http"
-	"gclassec/goClientCompute/util"
+	"git.openstack.org/openstack/golang-client.git/util"
 	"net/url"
 	"fmt"
 )

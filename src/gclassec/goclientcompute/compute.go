@@ -14,16 +14,16 @@
 //    License for the specific language governing permissions and limitations
 //    under the License.
 
-package goClientCompute
+package main
 import (
 	"fmt"
 	"time"
-	"gclassec/goClientCompute/openstack"
+	"git.openstack.org/openstack/golang-client.git/openstack"
 	"os"
 	"encoding/json"
 	"net/http"
-	"gclassec/goClientCompute/flavor"
-	"gclassec/goClientCompute/compute"
+	"git.openstack.org/openstack/golang-client.git/flavor"
+	"git.openstack.org/openstack/golang-client.git/compute"
 	"strings"
 
 )
@@ -39,7 +39,7 @@ type Configuration struct {
 
 func Compute() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("C:/Git/goclassec/computeVM.json")
+	file, _ := os.Open("C:/Project/Go/src/git.openstack.org/openstack/golang-client.git/examples/config.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
@@ -101,7 +101,7 @@ func Compute() []compute.DetailResponse {
 	return computeDetails
 }
 
-func FinalCompute() []compute.DetailResponse{
+func main() {
 	var flvObj []flavor.DetailResponse
 	flvObj = flavor.Flavor()
 	fmt.Println("&**********Showing FLVOBJ&************")
@@ -145,6 +145,4 @@ func FinalCompute() []compute.DetailResponse{
 			fmt.Println(tempVar1[j])
 		}
 	}
-	fmt.Println("Object",obj)
-	return obj
 }
