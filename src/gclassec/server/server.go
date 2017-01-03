@@ -4,7 +4,7 @@ import (
     // Standard library packages
     "net/http"
     // Third party packages
-    "gclassec/awsController"
+    "gclassec/awscontroller"
     "github.com/gorilla/mux"
     "fmt"
     "gclassec/openstackcontroller"
@@ -18,7 +18,7 @@ func main() {
 
     openstackinsert.InsertInstances()
     // Get a InstController instance
-    uc := awsController.NewUserController()
+    uc := awscontroller.NewUserController()
 
     op := openstackcontroller.NewUserController()
 
