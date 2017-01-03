@@ -1,4 +1,4 @@
-package awsController
+package awscontroller
 
 import (
 	"net/http"
