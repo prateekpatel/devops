@@ -1728,7 +1728,7 @@ func TestConcurrent(t *testing.T) {
 	})
 }
 
-// Tests custom dial functions
+// tests custom dial functions
 func TestCustomDial(t *testing.T) {
 	if !available {
 		t.Skipf("MySQL server not running on %s", netAddr)
