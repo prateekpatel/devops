@@ -9,52 +9,52 @@ import (
 
 func main() {
 	fmt.Println("Frisby")
-	frisby.Create("Connect to the localhost").
-		Get("http://localhost:9009/dbaas/list").
+	frisby.Create("Connect to the server").
+		Get("http://110.110.110.233:9009/dbaas/list").
 		Send().
 		ExpectStatus(200)
 		//ExpectContent(" list")
 
-	frisby.Create("Test to the local host (which fails)").
-		Get("http://localhost:9009/dbaas/list").
+	frisby.Create("Test to the server (Should fails in casesentive and post and delete aplhabatic character )").
+		Get("http://110.110.110.233:9009/dbaas/listw").
 		Send().
-		ExpectStatus(400)
-	frisby.Create("display the id").
-		Get("http://localhost:9009/dbaas/list/dev01-a-tky-customerorderpf").
-		Send().
-		ExpectStatus(200)
-
-	frisby.Create("display the id(Wich fails)").
-		Get("http://localhost:9009/dbaas/list/dev01-a-tky-customerorderpf").
-		Send().
-		ExpectStatus(400)
-	frisby.Create("display the cpu utalization").
-		Get("http://localhost:9009/dbaas/get?CPUUtilization_max=5&DatabaseConnections_max=0").
+		ExpectStatus(404)
+	frisby.Create("display the dbaas of the  id").
+		Get("http://110.110.110.233:9009/dbaas/list/dev01-a-tky-customerorderpf").
 		Send().
 		ExpectStatus(200)
 
-	frisby.Create("display the cpu utalization (Wich fails)").
-		Get("http://localhost:9009/dbaas/get?CPUUtilization_max=5&DatabaseConnections_max=0").
+	frisby.Create("display the dbaas id(server falis at numeric character)").
+		Get("http://110.110.110.233:9009/dbaas1/list/dev01-a-tky-customerorderpf").
 		Send().
-		ExpectStatus(400)
-	frisby.Create("display the sprint price").
-		Get("http://localhost:9009/dbaas/pricing").
+		ExpectStatus(404)
+	frisby.Create("display the cpu utalization server").
+		Get("http://110.110.110.233:9009/dbaas/get?CPUUtilization_max=5&DatabaseConnections_max=0").
 		Send().
 		ExpectStatus(200)
 
-	frisby.Create("display the sprint price (Wich fails)").
-		Get("http://localhost:9009/dbaas/pricing").
+	frisby.Create("display the cpu utalization server (should falis alphanumeric charecetr )").
+		Get("http://110.110.110.233:9009/dbaas1/get?CPUUtilization_max=acb2&DatabaseConnections_max=string").
 		Send().
-		ExpectStatus(400)
+		ExpectStatus(404)
+	frisby.Create("display the price of dbass").
+		Get("http://110.110.110.233:9009/dbaas/pricing").
+		Send().
+		ExpectStatus(200)
+
+	frisby.Create("display the price of dabbas (should falis in  post)").
+		Post("http://110.110.110.233:9009/dbaas/pricing").
+		Send().
+		ExpectStatus(404)
 		//ExpectContent("A string which won't be found")
 	frisby.Create("display the openstack details").
-		Get("http://localhost:9009/dbaas/openstackDetail").
+		Get("http://110.110.110.233:9009/dbaas/openstackDetail").
 		Send().
 		ExpectStatus(200)
 
-	frisby.Create("display the openstack details (Wich fails)").
-		Get("http://localhost:9009/dbaas/openstackDetail").
+	frisby.Create("display the openstack details (should fails in case senstive)").
+		Get("http://110.110.110.233:9009/dbaas/openstackdetail").
 		Send().
-		ExpectStatus(400)
+		ExpectStatus(404)
 	frisby.Global.PrintReport()
 }
