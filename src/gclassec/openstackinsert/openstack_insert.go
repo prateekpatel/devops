@@ -3,6 +3,7 @@ package openstackinsert
 import (
 
 	"gclassec/readopenstackconf"
+	_ "github.com/go-sql-driver/mysql"
 	"strings"
 	"github.com/jinzhu/gorm"
 	"gclassec/openstackInstance"

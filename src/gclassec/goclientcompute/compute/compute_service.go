@@ -243,32 +243,3 @@ type computeDetailResponse struct {
 type computeResponse struct {
 	Servers []Response `json:"servers"`
 }
-
-
-
-type FinalDetailResponse struct {
-	Name	       			string `json:"name"`
-	ID	       			string `json:"id"`
-	Status            		string `json:"status"`
-	Availability_zone      		string `json:"OS-EXT-AZ:availability_zone"`
-	Created				string `json:"created"`
-	Flavor				flavor.DetailResponse `json:"flavor"`
-	Addresses			address `json:"addresses"`
-	Security_groups 		[]security_groups `json:"security_groups"`
-	Key_name           		string `json:"key_name"`
-	Image           		Image  `json:"image"`
-	Tenant_id   			string `json:"tenant_id"`
-	Updated				string `json:"updated"`
-	User_id		      		string `json:"user_id"`
-	HostId				string `json:"hostId"`
-	Task_state   			string `json:"OS-EXT-STS:task_state"`
-	Vm_state			string `json:"OS-EXT-STS:vm_state"`
-	Launched_at		      	string `json:"OS-SRV-USG:launched_at"`
-	Volumes_attached   		[]Volume `json:"os-extended-volumes:volumes_attached"`
-	Progress            		int64  `json:"progress"`
-	IPV4				string	`json:"accessIPv4"`
-	IPV6				string	`json:"accessIPv6"`
-	Power_State			int64	`json:"OS-EXT-STS:power_state"`
-	ConfigDrive			string	`json:"config_drive"`
-	DiskConfig			string	`json:"OS-DCF:diskConfig"`
-}
