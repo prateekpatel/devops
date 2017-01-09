@@ -11,13 +11,15 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/examples/helpers"
 
 
-_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 
 	"strings"
-	"github.com/jinzhu/gorm"
+
 	"gclassec/readazureconf"
 
 	"gclassec/azurestruct"
+	"github.com/jinzhu/gorm"
+	"encoding/json"
 )
 
 type ls struct {
@@ -59,7 +61,7 @@ func checkEnvVar(envVars *map[string]string) error {
 	return nil
 }
 
-func AzureInsert()/* (result compute.VirtualMachineListResult, err error)*/{
+func AzureInsert(){
 	resourceGroup := "test"
 	os.Setenv("AZURE_CLIENT_ID", "2db3b1e3-b551-4e7a-b6cd-193042323f6a")
 	os.Setenv("AZURE_CLIENT_SECRET", "S0aY9oF0L0RGGfUEGoT/HSdqypxXKh7lmaTawlekrxw=")
@@ -81,21 +83,10 @@ func AzureInsert()/* (result compute.VirtualMachineListResult, err error)*/{
 	}
 	ac := compute.NewVirtualMachinesClient(c["AZURE_SUBSCRIPTION_ID"])
 	ac.Authorizer = spt
-	/*if ls, err = ac.List(resourceGroup); err != nil {
-		fmt.Printf("Failed to list virtual machines: %v\n", err)
-		return
-	}*/
+
 
 	ls, _ := ac.List(resourceGroup)
 
-	//u := &compute.VirtualMachineListResult{}
-
-
-
-	//json.Unmarshal([]byte(ls),&u)
-
-	//user:=azurestruct.AzureInstances{VmName:ls}
-//	_ = json.NewEncoder(os.Stdout).Encode(&user)
 
 	for _, element := range *ls.Value{
 		//println(element.Name,element.ID,element.Status,element.Progress)
@@ -104,18 +95,17 @@ func AzureInsert()/* (result compute.VirtualMachineListResult, err error)*/{
 		user:=azurestruct.AzureInstances{VmName:*element.Name,Type:*element.Type,Location:*element.Location,VmId:*element.VMID}
 
 		db.Create(&user)
-
-
-
 	}
+	//Get dynamic details (i.e. Percent CPU Utilization)
+	// of Azure Virtual Machine
+	dc := compute.NewDynamicUsageOperationsClient(c["AZURE_SUBSCRIPTION_ID"])
+	dc.Authorizer = spt
+
+	dlist, _ := dc.ListDynamic("testGo", resourceGroup)
+	fmt.Println(dlist)
+
+	_ = json.NewEncoder(os.Stdout).Encode(&dlist)
 
 
-	//_ = json.NewEncoder(os.Stdout).Encode(&ls)
 
-
-//	println(u.Value)
-//	println(u)
-
-		//return ls
-	//return ls
 }

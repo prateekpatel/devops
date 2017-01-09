@@ -11,13 +11,14 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/examples/helpers"
 
 
-_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 
 	"strings"
 	"github.com/jinzhu/gorm"
 	"gclassec/readazureconf"
 
 	"gclassec/azurestruct"
+	"encoding/json"
 )
 
 type ls struct {
@@ -96,6 +97,7 @@ func main()/* (result compute.VirtualMachineListResult, err error)*/{
 
 	//user:=azurestruct.AzureInstances{VmName:ls}
 //	_ = json.NewEncoder(os.Stdout).Encode(&user)
+	/*
 
 	for _, element := range *ls.Value{
 		//println(element.Name,element.ID,element.Status,element.Progress)
@@ -108,14 +110,29 @@ func main()/* (result compute.VirtualMachineListResult, err error)*/{
 
 
 	}
+	*/
+for _, element := range *ls.Value {
+	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState}
+	db.Create(&user)
+}
+	dc := compute.NewDynamicUsageOperationsClient(c["AZURE_SUBSCRIPTION_ID"])
+	dc.Authorizer = spt
+
+	dlist, _ := dc.ListDynamic("testGo", resourceGroup)
+	fmt.Println(dlist)
+
+	_ = json.NewEncoder(os.Stdout).Encode(&dlist)
 
 
-	//_ = json.NewEncoder(os.Stdout).Encode(&ls)
+for _, element := range *dlist.Value{
+
+		user:=azurestruct.AzureInstancesDynamic{Id:*element.Id}
+
+	for _, element1 := range *element.Data {
+		user = azurestruct.AzureInstancesDynamic{Timestamp:*element1.TimeStamp, Average:*element1.Average  }
+	}
+		db.Create(&user)
 
 
-//	println(u.Value)
-//	println(u)
-
-		//return ls
-	//return ls
+	}
 }
