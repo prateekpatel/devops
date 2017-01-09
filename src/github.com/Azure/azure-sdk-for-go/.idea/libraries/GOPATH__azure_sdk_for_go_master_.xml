@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;azure-sdk-for-go-master&gt;">
+    <CLASSES>
+      <root url="file://E:/Git/goclassec/src/git.openstack.org" />
+      <root url="file://E:/Git/goclassec/src/honnef.co" />
+      <root url="file://E:/Git/goclassec/src/gopkg.in" />
+      <root url="file://E:/Git/goclassec/src/golang.org" />
+      <root url="file://E:/Git/goclassec/src/github.com" />
+      <root url="file://E:/Git/goclassec/src/gclassec" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://E:/Git/goclassec/src/git.openstack.org" />
+      <root url="file://E:/Git/goclassec/src/honnef.co" />
+      <root url="file://E:/Git/goclassec/src/gopkg.in" />
+      <root url="file://E:/Git/goclassec/src/golang.org" />
+      <root url="file://E:/Git/goclassec/src/github.com" />
+      <root url="file://E:/Git/goclassec/src/gclassec" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

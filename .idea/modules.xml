@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://E:/azure_go/.idea/azure-sdk-for-go-master.iml" filepath="E:/azure_go/.idea/azure-sdk-for-go-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/goclassec.iml" filepath="$PROJECT_DIR$/.idea/goclassec.iml" />
     </modules>
   </component>

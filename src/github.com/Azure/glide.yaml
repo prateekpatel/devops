@@ -1,0 +1,20 @@
+package: github.com/Azure
+import:
+- package: github.com/Azure/go-autorest
+  version: v7.2.2
+  subpackages:
+  - autorest
+  - autorest/azure
+  - autorest/date
+  - autorest/to
+  - autorest/validation
+- package: github.com/satori/uuid
+  version: v1.1.0
+- package: github.com/shopspring/decimal
+- package: golang.org/x/crypto
+  subpackages:
+  - pkcs12
+- package: gopkg.in/godo.v2
+  version: v2.0.9
+testImport:
+- package: gopkg.in/check.v1

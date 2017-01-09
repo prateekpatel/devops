@@ -11,16 +11,20 @@ import (
     "gclassec/validation"
     "gclassec/openstackinsert"
 
+    "gclassec/azureinsert"
+    "gclassec/azurecontroller"
 )
 
 func main() {
     mx := mux.NewRouter()
 
     openstackinsert.InsertInstances()
-    // Get a InstController instance
+    azureinsert.AzureInsert()
+
     uc := awscontroller.NewUserController()
 
     op := openstackcontroller.NewUserController()
+    op1 := azurecontroller.NewUserController()
 
     mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 
@@ -35,11 +39,14 @@ func main() {
 
     mx.HandleFunc("/dbaas/openstackDetail", op.GetDetailsOpenstack).Methods("GET")
 
-    //using handle
+    mx.HandleFunc("/dbaas/azureDetail", op1.GetAzureDetails).Methods("GET")
     http.Handle("/", mx)
 
     // Fire up the server
     fmt.Println("Server is on Port 9009")
     fmt.Println("Listening .....")
+
+
+
     http.ListenAndServe("0.0.0.0:9009", nil)
 }

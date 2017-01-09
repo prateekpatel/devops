@@ -29,10 +29,10 @@ var b []string = []string{dbusername,":",dbpassword,"@tcp","(",dbhostname,":",db
 var c string = (strings.Join(b,""))
 var db,err  = gorm.Open(dbtype, c)
 
-
 func InsertInstances(){
 	//println(examples.ComputeFunc())
 	computeDetails:= goclientcompute.FinalCompute()
+	println(computeDetails)
 	for _, element := range computeDetails {
 		//println(element.Name,element.ID,element.Status,element.Progress)
 		/*user :=	openstackInstance.Instances{Name:element.Name,InstanceID:element.ID,Status:element.Status,AvailabilityZone:element.Availability_zone,CreationTime:element.Created,
@@ -43,4 +43,5 @@ func InsertInstances(){
 		FlavorID:element.Flavor.FlavorID,IPAddress:element.IPV4,KeyPairName:element.Key_name,ImageName:element.Image.ID}
 		db.Create(&user)
 	}
+
 }
