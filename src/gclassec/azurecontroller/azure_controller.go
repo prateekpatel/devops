@@ -14,7 +14,7 @@ import(
 	"net/http"
 )
 type (
-    // UserController represents the controller for operating on the User resource
+
     UserController struct{}
 )
 func NewUserController() *UserController {

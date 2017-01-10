@@ -1,6 +1,10 @@
 package azurestruct
 
-import	"github.com/Azure/go-autorest/autorest/date"
+
+
+//import "github.com/Azure/go-autorest/autorest/date"
+
+//import "github.com/Azure/go-autorest/autorest/date"
 
 type AzureInstances struct{
 	VmName string 			`gorm:"column:name"`
@@ -13,6 +17,7 @@ type AzureInstances struct{
 	VmId string			`gorm:"column:vmid"`
 	AvailabilitySetName string 	`gorm:"column:availabilitysetid"`
 	Provisioningstate string	`sql:"type:decimal" gorm:"column:provisioningstate"`
+	ResourcegroupName string	`gorm:"column:resourcegroupname"`
 
 }
 
@@ -20,7 +25,7 @@ type AzureInstances struct{
 
 type AzureInstancesDynamic struct {
 	Id	       			string `gorm:"column:id"`
-	Timestamp 			date.Time `gorm:"column:timestamp"`
+	Timestamp 			string `gorm:"column:timestamp"`
 	Average				float32 `gorm:"column:average"`
 
 

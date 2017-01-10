@@ -17,8 +17,9 @@ import (
 	"github.com/jinzhu/gorm"
 	"gclassec/readazureconf"
 
-	"gclassec/azurestruct"
+
 	"encoding/json"
+	"gclassec/azurestruct"
 )
 
 type ls struct {
@@ -61,7 +62,7 @@ func checkEnvVar(envVars *map[string]string) error {
 }
 
 func main()/* (result compute.VirtualMachineListResult, err error)*/{
-	resourceGroup := "test"
+	//resourceGroup := "test"
 	os.Setenv("AZURE_CLIENT_ID", "2db3b1e3-b551-4e7a-b6cd-193042323f6a")
 	os.Setenv("AZURE_CLIENT_SECRET", "S0aY9oF0L0RGGfUEGoT/HSdqypxXKh7lmaTawlekrxw=")
 	os.Setenv("AZURE_SUBSCRIPTION_ID", "96782a8b-5f88-48ac-ac3c-91679baeb0ad")
@@ -87,7 +88,7 @@ func main()/* (result compute.VirtualMachineListResult, err error)*/{
 		return
 	}*/
 
-	ls, _ := ac.List(resourceGroup)
+	//ls, _ := ac.List(resourceGroup)
 
 	//u := &compute.VirtualMachineListResult{}
 
@@ -111,14 +112,19 @@ func main()/* (result compute.VirtualMachineListResult, err error)*/{
 
 	}
 	*/
+/*
 for _, element := range *ls.Value {
 	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState}
 	db.Create(&user)
 }
 	dc := compute.NewDynamicUsageOperationsClient(c["AZURE_SUBSCRIPTION_ID"])
 	dc.Authorizer = spt
+*/
 
-	dlist, _ := dc.ListDynamic("testGo", resourceGroup)
+
+
+
+	/*dlist, _ := dc.ListDynamic("testGo", resourceGroup)
 	fmt.Println(dlist)
 
 	_ = json.NewEncoder(os.Stdout).Encode(&dlist)
@@ -134,5 +140,22 @@ for _, element := range *dlist.Value{
 		db.Create(&user)
 
 
-	}
+	}*/
+	println("-------------------------------------------------()--------------------------------------------")
+
+	rg,_:= ac.ListAll()
+
+		_ = json.NewEncoder(os.Stdout).Encode(&rg)
+
+
+
+for _, element := range *rg.Value {
+	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState}
+	db.Create(&user)
+}
+
+
+
+
+
 }

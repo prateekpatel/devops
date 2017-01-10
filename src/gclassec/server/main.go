@@ -39,7 +39,7 @@ func main() {
 
     mx.HandleFunc("/dbaas/openstackDetail", op.GetDetailsOpenstack).Methods("GET")
 
-    mx.HandleFunc("/dbaas/azureDetail", op1.GetAzureDetails).Methods("GET")
+    mx.HandleFunc("/dbaas/azureDetail", op1.GetAzureDetails).Methods("GET") // http://localhost:9009/dbaas/azureDetail
     http.Handle("/", mx)
 
     // Fire up the server
