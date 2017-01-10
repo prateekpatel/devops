@@ -40,6 +40,9 @@ func main() {
     mx.HandleFunc("/dbaas/openstackDetail", op.GetDetailsOpenstack).Methods("GET")
 
     mx.HandleFunc("/dbaas/azureDetail", op1.GetAzureDetails).Methods("GET") // http://localhost:9009/dbaas/azureDetail
+
+    mx.HandleFunc("/dbaas/azureDetail/percentCPU/{resourceGroup}/{name}", op1.GetDynamicAzureDetails).Methods("GET")
+
     http.Handle("/", mx)
 
     // Fire up the server

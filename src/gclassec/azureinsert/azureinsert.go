@@ -4,22 +4,15 @@ package azureinsert
 import (
 	"os"
 	"log"
-
 	"github.com/Azure/go-autorest/autorest/azure"
 	"fmt"
 	"github.com/Azure/azure-sdk-for-go/arm/compute"
 	"github.com/Azure/azure-sdk-for-go/arm/examples/helpers"
-
-
 	_ "github.com/go-sql-driver/mysql"
-
 	"strings"
-
 	"gclassec/readazureconf"
-
 	"gclassec/azurestruct"
 	"github.com/jinzhu/gorm"
-
 	"encoding/json"
 )
 
@@ -88,25 +81,25 @@ func AzureInsert() {
 	ls, _ := ac.ListAll()
 	_ = json.NewEncoder(os.Stdout).Encode(&ls)
 
-	var drggroup string
+	//var drggroup string
 	for _, element := range *ls.Value {
 		//println(element.Name,element.ID,element.Status,element.Progress)
 		//user :=	azurestruct.AzureInstances{VmName:element.NextLink}
 	rgroup:=*(element.AvailabilitySet.ID)
 	resourcegroupname := strings.Split(rgroup, "/")
-		drggroup= resourcegroupname[4]
+		//drggroup= resourcegroupname[4]
 	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState,ResourcegroupName:resourcegroupname[4]}
 	db.Create(&user)
 	}
 	//Get dynamic details (i.e. Percent CPU Utilization)
 	// of Azure Virtual Machine
-	dc := compute.NewDynamicUsageOperationsClient(c["AZURE_SUBSCRIPTION_ID"])
+	/*dc := compute.NewDynamicUsageOperationsClient(c["AZURE_SUBSCRIPTION_ID"])
 	dc.Authorizer = spt
 
 	dlist, _ := dc.ListDynamic("testGo",drggroup )
 	fmt.Println(dlist)
 
-	_ = json.NewEncoder(os.Stdout).Encode(&dlist)
+	_ = json.NewEncoder(os.Stdout).Encode(&dlist)*/
 
 
 }
