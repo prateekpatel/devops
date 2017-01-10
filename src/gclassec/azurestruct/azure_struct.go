@@ -8,7 +8,7 @@ type AzureInstances struct{
 	VmName string 			`gorm:"column:name"`
 	Type string 			`gorm:"column:type"`
 	Location string 		`gorm:"column:location"`
-	VmSize string            	`gorm:"column:vmsize"`
+	VmSize string           	`sql:"type:varchar" gorm:"column:vmsize"`
 	Publisher string 		`gorm:"column:publisher"`
 	Offer string 			`gorm:"column:offer"`
 	SKU string 			`gorm:"column:sku"`

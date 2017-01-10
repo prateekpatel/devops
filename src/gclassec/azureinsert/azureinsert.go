@@ -88,7 +88,7 @@ func AzureInsert() {
 	rgroup:=*(element.AvailabilitySet.ID)
 	resourcegroupname := strings.Split(rgroup, "/")
 		//drggroup= resourcegroupname[4]
-	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState,ResourcegroupName:resourcegroupname[4]}
+	user := azurestruct.AzureInstances{VmName:*element.Name, Type:*element.Type, Location:*element.Location,VmSize:element.VirtualMachineProperties.HardwareProfile.VMSize, VmId:*element.VMID, Publisher:*(element.StorageProfile.ImageReference.Publisher), Offer:*(element.StorageProfile.ImageReference.Offer), SKU:*(element.StorageProfile.ImageReference.Sku), AvailabilitySetName:*(element.AvailabilitySet.ID), Provisioningstate:*element.ProvisioningState,ResourcegroupName:resourcegroupname[4]}
 	db.Create(&user)
 	}
 	//Get dynamic details (i.e. Percent CPU Utilization)

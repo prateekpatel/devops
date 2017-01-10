@@ -144,6 +144,7 @@ const (
 
 // VirtualMachineSizeTypes enumerates the values for virtual machine size
 // types.
+/*
 type VirtualMachineSizeTypes string
 
 const (
@@ -332,6 +333,7 @@ const (
 	// types.
 	StandardGS5 VirtualMachineSizeTypes = "Standard_GS5"
 )
+*/
 
 // AdditionalUnattendContent is additional XML formatted information that can
 // be included in the Unattend.xml file, which is used by Windows Setup.
@@ -439,7 +441,7 @@ type DiskInstanceView struct {
 
 // HardwareProfile is describes a hardware profile.
 type HardwareProfile struct {
-	VMSize VirtualMachineSizeTypes `json:"vmSize,omitempty"`
+	VMSize string `json:"vmSize,omitempty"`
 }
 
 // ImageReference is the image reference.
