@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;goclassec&gt;">
+    <CLASSES>
+      <root url="file://C:/Projects/Go/src/sessionExample" />
+      <root url="file://C:/Projects/Go/src/CloudApp" />
+      <root url="file://C:/Projects/Go/src/github.com" />
+      <root url="file://C:/Projects/Go/src/Sample" />
+      <root url="file://C:/Projects/Go/src/Example" />
+      <root url="file://C:/Projects/Go/src/AppDemo" />
+      <root url="file://C:/Projects/Go/src/TestDb" />
+      <root url="file://C:/Projects/Go/src/azureCompute" />
+      <root url="file://C:/Projects/Go/src/goAzure" />
+      <root url="file://C:/Projects/Go/src/TEST2" />
+      <root url="file://C:/Projects/Go/src/untitled1" />
+      <root url="file://C:/Projects/Go/src/untitled" />
+      <root url="file://C:/Projects/Go/src/Demo" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://C:/Projects/Go/src/sessionExample" />
+      <root url="file://C:/Projects/Go/src/CloudApp" />
+      <root url="file://C:/Projects/Go/src/github.com" />
+      <root url="file://C:/Projects/Go/src/Sample" />
+      <root url="file://C:/Projects/Go/src/Example" />
+      <root url="file://C:/Projects/Go/src/AppDemo" />
+      <root url="file://C:/Projects/Go/src/TestDb" />
+      <root url="file://C:/Projects/Go/src/azureCompute" />
+      <root url="file://C:/Projects/Go/src/goAzure" />
+      <root url="file://C:/Projects/Go/src/TEST2" />
+      <root url="file://C:/Projects/Go/src/untitled1" />
+      <root url="file://C:/Projects/Go/src/untitled" />
+      <root url="file://C:/Projects/Go/src/Demo" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
