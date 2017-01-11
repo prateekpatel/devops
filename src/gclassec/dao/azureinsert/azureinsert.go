@@ -14,6 +14,7 @@ import (
 	"gclassec/structs/azurestruct"
 	"github.com/jinzhu/gorm"
 	"encoding/json"
+	"gclassec/readcredentials"
 )
 
 type ls struct {
@@ -42,6 +43,11 @@ var db,err  = gorm.Open(dbtype, c)
 
 
 
+/*var client_id = azure_creds.Clientid
+var client_secret = azure_creds.ClientSecret
+var subscription_id = azure_creds.Subscriptionid
+var tenant_id = azure_creds.Tenantid*/
+
 func checkEnvVar(envVars *map[string]string) error {
 	var missingVars []string
 	for varName, value := range *envVars {
@@ -56,11 +62,13 @@ func checkEnvVar(envVars *map[string]string) error {
 }
 
 func AzureInsert() {
-	//resourceGroup := "test"
-	os.Setenv("AZURE_CLIENT_ID", "2db3b1e3-b551-4e7a-b6cd-193042323f6a")
-	os.Setenv("AZURE_CLIENT_SECRET", "S0aY9oF0L0RGGfUEGoT/HSdqypxXKh7lmaTawlekrxw=")
-	os.Setenv("AZURE_SUBSCRIPTION_ID", "96782a8b-5f88-48ac-ac3c-91679baeb0ad")
-	os.Setenv("AZURE_TENANT_ID", "db72859f-dc89-46f4-9134-30e8d982ba21")
+	var azure_creds = readazurecreds.Configurtion()
+	os.Setenv("AZURE_CLIENT_ID", azure_creds.ClientId)
+	os.Setenv("AZURE_CLIENT_SECRET", azure_creds.ClientSecret)
+	os.Setenv("AZURE_SUBSCRIPTION_ID", azure_creds.SubscriptionId)
+	os.Setenv("AZURE_TENANT_ID", azure_creds.TenantId)
+	println("------------AZURE CLIENT ID--------------")
+	println(azure_creds.ClientId)
 	c := map[string]string{
 		"AZURE_CLIENT_ID":       os.Getenv("AZURE_CLIENT_ID"),
 		"AZURE_CLIENT_SECRET":   os.Getenv("AZURE_CLIENT_SECRET"),

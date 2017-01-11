@@ -1,4 +1,4 @@
-package readawsconf
+package readazurecreds
 
 import (
 	"os"
@@ -7,15 +7,15 @@ import (
 )
 
 type Configuration struct {
-    Clientid    string
+    ClientId    string
     ClientSecret   string
-    Subscriptionid   string
-    Tenantid   string
+    SubscriptionId   string
+    TenantId   string
 
 }
 
 func Configurtion() Configuration{
-	file, _ := os.Open("C:\azure-sdk-for-go-master\azure-sdk-for-go-master\azurecred.json")
+	file, _ := os.Open("C://goclassec//src//gclassec//conf//azurecred.json")
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)

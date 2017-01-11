@@ -10,7 +10,6 @@ import (
     "gclassec/controllers/openstackcontroller"
     "gclassec/validation"
     "gclassec/dao/openstackinsert"
-
     "gclassec/dao/azureinsert"
     "gclassec/controllers/azurecontroller"
 )
@@ -18,13 +17,12 @@ import (
 func main() {
     mx := mux.NewRouter()
 
-    openstackinsert.InsertInstances()
-    azureinsert.AzureInsert()
-
     uc := awscontroller.NewUserController()
-
     op := openstackcontroller.NewUserController()
     op1 := azurecontroller.NewUserController()
+
+    openstackinsert.InsertInstances()
+    azureinsert.AzureInsert()
 
     mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 
