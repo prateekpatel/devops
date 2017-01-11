@@ -3,12 +3,12 @@ package awscontroller
 import (
 	"net/http"
 	_ "github.com/go-sql-driver/mysql"
-	"gclassec/readawsconf"
+	"gclassec/confmanagement/readawsconf"
 	"strings"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"gclassec/awsstructs"
+	"gclassec/structs/awsstructs"
 )
 
 type (

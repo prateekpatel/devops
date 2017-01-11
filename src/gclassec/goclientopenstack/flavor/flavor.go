@@ -19,7 +19,7 @@ type Configuration struct {
 
 func Flavor() []DetailResponse{
 	//config := getConfig()
-	file, _ := os.Open("C:\\goclassec\\computeVM.json")
+	file, _ := os.Open("C:\\goclassec\\src\\gclassec\\conf\\computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)

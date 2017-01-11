@@ -6,8 +6,8 @@ import(
 	"net/http"
 	"encoding/json"
 
-	"gclassec/openstackInstance"
-	"gclassec/readopenstackconf"
+	"gclassec/structs/openstackInstance"
+	"gclassec/confmanagement/readopenstackconf"
 
 )
 type (

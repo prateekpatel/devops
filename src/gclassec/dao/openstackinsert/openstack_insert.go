@@ -2,12 +2,12 @@ package openstackinsert
 
 import (
 
-	"gclassec/readopenstackconf"
+	"gclassec/confmanagement/readopenstackconf"
 	_ "github.com/go-sql-driver/mysql"
 	"strings"
 	"github.com/jinzhu/gorm"
-	"gclassec/openstackInstance"
-	"gclassec/goclientcompute"
+	"gclassec/structs/openstackInstance"
+	"gclassec/goclientopenstack"
 )
 type (
     // UserController represents the controller for operating on the User resource

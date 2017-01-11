@@ -4,15 +4,15 @@ import (
     // Standard library packages
     "net/http"
     // Third party packages
-    "gclassec/awscontroller"
+    "gclassec/controllers/awscontroller"
     "github.com/gorilla/mux"
     "fmt"
-    "gclassec/openstackcontroller"
+    "gclassec/controllers/openstackcontroller"
     "gclassec/validation"
-    "gclassec/openstackinsert"
+    "gclassec/dao/openstackinsert"
 
-    "gclassec/azureinsert"
-    "gclassec/azurecontroller"
+    "gclassec/dao/azureinsert"
+    "gclassec/controllers/azurecontroller"
 )
 
 func main() {
@@ -48,8 +48,6 @@ func main() {
     // Fire up the server
     fmt.Println("Server is on Port 9009")
     fmt.Println("Listening .....")
-
-
 
     http.ListenAndServe("0.0.0.0:9009", nil)
 }

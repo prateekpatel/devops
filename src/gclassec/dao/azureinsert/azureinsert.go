@@ -10,8 +10,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/examples/helpers"
 	_ "github.com/go-sql-driver/mysql"
 	"strings"
-	"gclassec/readazureconf"
-	"gclassec/azurestruct"
+	"gclassec/confmanagement/readazureconf"
+	"gclassec/structs/azurestruct"
 	"github.com/jinzhu/gorm"
 	"encoding/json"
 )

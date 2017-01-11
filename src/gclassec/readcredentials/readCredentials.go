@@ -9,7 +9,7 @@ import (
 type Configuration struct {
     Clientid    string
     ClientSecret   string
-	Subscriptionid   string
+    Subscriptionid   string
     Tenantid   string
 
 }

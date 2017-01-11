@@ -22,10 +22,9 @@ import (
 	"os"
 	"encoding/json"
 	"net/http"
-	"gclassec/goclientcompute/flavor"
-	"gclassec/goclientcompute/compute"
+	"gclassec/goclientopenstack/flavor"
+	"gclassec/goclientopenstack/compute"
 	"strings"
-
 )
 type Configuration struct {
     Host    string
@@ -39,7 +38,7 @@ type Configuration struct {
 
 func Compute() []compute.DetailResponse {
 	//config := getConfig()
-	file, _ := os.Open("C:\\goclassec\\computeVM.json")
+	file, _ := os.Open("C:\\goclassec\\src\\gclassec\\conf\\computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)

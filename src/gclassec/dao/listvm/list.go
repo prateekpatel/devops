@@ -15,11 +15,11 @@ import (
 
 	"strings"
 	"github.com/jinzhu/gorm"
-	"gclassec/readazureconf"
+	"gclassec/confmanagement/readazureconf"
 
 
 	"encoding/json"
-	"gclassec/azurestruct"
+	"gclassec/structs/azurestruct"
 )
 
 type ls struct {
