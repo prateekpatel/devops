@@ -18,7 +18,7 @@ type Configuration struct {
 
 func Configurtion() Configuration{
 	dir, _ := os.Getwd()
-	file, _ := os.Open(dir + "\\src\\gclassec\\conf\\osazureconf.json")
+	file, _ := os.Open(dir + "/src/gclassec/conf/osazureconf.json")
 	decoder := json.NewDecoder(file)
 	configuration := Configuration{}
 	err := decoder.Decode(&configuration)
