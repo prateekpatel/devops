@@ -12,6 +12,7 @@ import (
     "gclassec/dao/openstackinsert"
     "gclassec/dao/azureinsert"
     "gclassec/controllers/azurecontroller"
+    "os"
 )
 
 func main() {
@@ -46,6 +47,8 @@ func main() {
     // Fire up the server
     fmt.Println("Server is on Port 9009")
     fmt.Println("Listening .....")
+
+    fmt.Println(os.Getwd())
 
     http.ListenAndServe("0.0.0.0:9009", nil)
 }
