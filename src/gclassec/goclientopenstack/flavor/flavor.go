@@ -3,9 +3,11 @@ import (
 	"fmt"
 	"time"
 	"git.openstack.org/openstack/golang-client.git/openstack"
-	"os"
 	"encoding/json"
 	"net/http"
+	"runtime"
+	"strings"
+	"os"
 )
 type Configuration struct {
     Host	string
@@ -19,8 +21,14 @@ type Configuration struct {
 
 func Flavor() []DetailResponse{
 	//config := getConfig()
-	dir, _ := os.Getwd()
-	file, _ := os.Open(dir + "/src/gclassec/conf/computeVM.json")
+	filename := "goclientopenstack/flavor/flavor.go"
+       _, filePath, _, _ := runtime.Caller(0)
+       fmt.Println("CurrentFilePath:==",filePath)
+       ConfigFilePath :=(strings.Replace(filePath, filename, "conf/computeVM.json", 1))
+       fmt.Println("ABSPATH:==",ConfigFilePath)
+	file, _ := os.Open(ConfigFilePath)
+	//dir, _ := os.Getwd()
+	//file, _ := os.Open(dir + "/src/gclassec/conf/computeVM.json")
 	decoder := json.NewDecoder(file)
 	config := Configuration{}
 	err := decoder.Decode(&config)
