@@ -13,6 +13,7 @@ import (
     "gclassec/dao/azureinsert"
     "gclassec/controllers/azurecontroller"
     "os"
+    "gclassec/controllers/confcontroller"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
     uc := awscontroller.NewUserController()
     op := openstackcontroller.NewUserController()
     op1 := azurecontroller.NewUserController()
+    uc1 := confcontroller.NewUserController()
 
     openstackinsert.InsertInstances()
     azureinsert.AzureInsert()
@@ -42,7 +44,19 @@ func main() {
 
     mx.HandleFunc("/dbaas/azureDetail/percentCPU/{resourceGroup}/{name}", op1.GetDynamicAzureDetails).Methods("GET")
 
-    http.Handle("/", mx)
+    mx.HandleFunc("/selectProvider", uc1.SelectProvider)
+
+    mx.HandleFunc("/selectedOs", uc1.OpenstackCreds)
+
+	mx.HandleFunc("/selectedAzure", uc1.AzureCreds)
+
+    mx.HandleFunc("/providers", uc1.ProviderHandler).Methods("POST")
+
+    mx.HandleFunc("/providers/openstack", uc1.ProviderOpenstack).Methods("POST")
+
+	mx.HandleFunc("/providers/azure", uc1.ProviderAzure).Methods("POST")
+
+	http.Handle("/", mx)
 
     // Fire up the server
     fmt.Println("Server is on Port 9009")
