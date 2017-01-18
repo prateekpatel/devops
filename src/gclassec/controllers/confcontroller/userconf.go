@@ -8,11 +8,6 @@ import (
 	"bufio"
 )
 
-type (
-    // UserController represents the controller for operating on the User resource
-    UserController struct{}
-)
-
 var redirectTarget string
 
  const indexPage = `
@@ -72,6 +67,11 @@ const azurePage = `
       <button type="submit">Submit</button>
   </form>`
 
+type (
+    // UserController represents the controller for operating on the User resource
+    UserController struct{}
+)
+
 func NewUserController() *UserController {
     return &UserController{}
 }
@@ -108,7 +108,6 @@ func (uc UserController) ProviderHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Request) {
-	//fmt.Fprintf(w, osPage)
 	//host := r.FormValue("host")
 	c := map[string]string{
 		"host":       r.FormValue("host"),
@@ -119,9 +118,6 @@ func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Reques
 		"container": r.FormValue("container"),
 		"imageregion": r.FormValue("imageregion"),
 		"controller": r.FormValue("controller")}
-
-	//var c=make([]val,1)
-	//c[0] = val{r.FormValue("host"),r.FormValue("username"),r.FormValue("password"),r.FormValue("projectid"),r.FormValue("projectname"),r.FormValue("container"),r.FormValue("imageregion"),r.FormValue("controller")}
 
   	outputjson,_:=json.Marshal(c)
 	f, err := os.Create("C:/goclassec/src/gclassec/conf/computeVM.json")

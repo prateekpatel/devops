@@ -14,6 +14,7 @@ import (
     "gclassec/controllers/azurecontroller"
     "os"
     "gclassec/controllers/confcontroller"
+    "gclassec/controllers/vmwarecontroller"
 )
 
 func main() {
@@ -21,8 +22,10 @@ func main() {
 
     uc := awscontroller.NewUserController()
     op := openstackcontroller.NewUserController()
-    op1 := azurecontroller.NewUserController()
+    ac := azurecontroller.NewUserController()
     uc1 := confcontroller.NewUserController()
+    vc := vmwarecontroller.NewUserController()
+
 
     openstackinsert.InsertInstances()
     azureinsert.AzureInsert()
@@ -40,9 +43,11 @@ func main() {
 
     mx.HandleFunc("/dbaas/openstackDetail", op.GetDetailsOpenstack).Methods("GET")
 
-    mx.HandleFunc("/dbaas/azureDetail", op1.GetAzureDetails).Methods("GET") // http://localhost:9009/dbaas/azureDetail
+    mx.HandleFunc("/dbaas/azureDetail", ac.GetAzureDetails).Methods("GET") // http://localhost:9009/dbaas/azureDetail
 
-    mx.HandleFunc("/dbaas/azureDetail/percentCPU/{resourceGroup}/{name}", op1.GetDynamicAzureDetails).Methods("GET")
+    mx.HandleFunc("/dbaas/azureDetail/percentCPU/{resourceGroup}/{name}", ac.GetDynamicAzureDetails).Methods("GET")
+
+    mx.HandleFunc("/dbaas/vcenterDetail", vc.GetDynamicVcenterDetails).Methods("GET")
 
     mx.HandleFunc("/selectProvider", uc1.SelectProvider)
 
