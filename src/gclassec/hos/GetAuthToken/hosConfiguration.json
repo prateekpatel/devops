@@ -1,0 +1,12 @@
+{
+        "keystoneEndpoint": "http://140.140.140.41:5000/v2.0",
+        "userName": "admin",
+        "password": "677xkY5nLc",
+        "projectName": "default",
+        "projectID": "default",
+        "container": "I♡HPHelion",
+        "region": "",
+        "tenantName": "admin",
+        "tenantID": "13a46539e3a146f68fc5b105655403fa"
+
+}

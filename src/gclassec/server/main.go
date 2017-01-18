@@ -15,6 +15,7 @@ import (
     "os"
     "gclassec/controllers/confcontroller"
     "gclassec/controllers/vmwarecontroller"
+    "gclassec/controllers/hoscontroller"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
     ac := azurecontroller.NewUserController()
     uc1 := confcontroller.NewUserController()
     vc := vmwarecontroller.NewUserController()
-
+    hc := hoscontroller.NewUserController()
 
     openstackinsert.InsertInstances()
     azureinsert.AzureInsert()
@@ -33,6 +34,13 @@ func main() {
     mx.NotFoundHandler = http.HandlerFunc(validation.ValidateWrongURL)
 
     // Get a instance resource
+    mx.HandleFunc("/hos/computedetails",hc.GetComputeDetails).Methods("GET")
+    mx.HandleFunc("/hos/flavorsdetails",hc.GetFlavorsDetails).Methods("GET")
+    mx.HandleFunc("/hos/cpu_utilization/{id}",hc.CpuUtilDetails).Methods("GET")
+	//mux.HandleFunc("/hos/ceilometerstatitics",GetCeilometerStatitics).Methods("GET")
+	//mux.HandleFunc("/hos/ceilometerdetails",GetCeilometerDetails).Methods("GET")
+    mx.HandleFunc("/hos/index",hc.Index).Methods("GET")
+
     mx.HandleFunc("/dbaas/list", uc.GetDetails).Methods("GET")  // 'http://localhost:9009/dbaas/list'
 
     mx.HandleFunc("/dbaas/list/{id}", uc.GetDetailsById).Methods("GET")  // 'http://localhost:9009/dbaas/list/dev01-a-tky-customerorderpf'

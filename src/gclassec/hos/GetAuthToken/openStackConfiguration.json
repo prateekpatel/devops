@@ -1,0 +1,11 @@
+{
+    "keystoneEndpoint": "http://110.110.110.5:5000/v2.0",
+    "userName": "ankurtiwari",
+    "password": "atmecs@123",
+    "tenantName": "HPE",
+    "tenantID": "99e1e2d5093446f1b5ae11939272c2df",
+    "projectName": "default",
+    "projectID": "default",
+    "container": "I♡HPHelion",
+    "region": ""
+}
