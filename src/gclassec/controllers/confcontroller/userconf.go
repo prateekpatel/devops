@@ -6,6 +6,8 @@ import (
 	"os"
 	"encoding/json"
 	"bufio"
+	"runtime"
+	"strings"
 )
 
 var redirectTarget string
@@ -120,7 +122,13 @@ func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Reques
 		"controller": r.FormValue("controller")}
 
   	outputjson,_:=json.Marshal(c)
-	f, err := os.Create("C:/goclassec/src/gclassec/conf/computeVM.json")
+
+	filename := "controllers/confcontroller/userconf.go"
+       _, filePath, _, _ := runtime.Caller(0)
+       fmt.Println("CurrentFilePath:==",filePath)
+       ConfigFilePath :=(strings.Replace(filePath, filename, "conf/computeVM.json", 1))
+       fmt.Println("ABSPATH:==",ConfigFilePath)
+	f, err := os.Create(ConfigFilePath)
 
 	//f, err := os.OpenFile("C:/goclassec/src/gclassec/conf/dependencies.env", os.O_APPEND | os.O_WRONLY, 0600)
 	if err != nil {
@@ -151,7 +159,13 @@ func (uc UserController) ProviderAzure(w http.ResponseWriter, r *http.Request) {
 		"tenantid": r.FormValue("tenantid")}
 
 	outputjson,_:=json.Marshal(c)
-	f, err := os.Create("C:/goclassec/src/gclassec/conf/azurecred.json")
+
+	filename := "controllers/confcontroller/userconf.go"
+       _, filePath, _, _ := runtime.Caller(0)
+       fmt.Println("CurrentFilePath:==",filePath)
+       ConfigFilePath :=(strings.Replace(filePath, filename, "conf/azurecred.json", 1))
+       fmt.Println("ABSPATH:==",ConfigFilePath)
+	f, err := os.Create(ConfigFilePath)
 
 	//f, err := os.OpenFile("C:/goclassec/src/gclassec/conf/dependencies.env", os.O_APPEND | os.O_WRONLY, 0600)
 	if err != nil {
