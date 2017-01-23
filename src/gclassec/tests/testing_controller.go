@@ -142,14 +142,14 @@ var URL string = (strings.Join(b,""))
 		ExpectStatus(404)
 	//providers post ...................................
 
-	regi := "{username: swathi, password: atmecs@123}"
-	frisby.Create("Test POST").
-		Post(URL+"/providers").
-		Send().
-		SetJson(regi).
-		ExpectStatus(200).
-	AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
-		})
+	//regi := "{username: swathi, password: atmecs@123}"
+	//frisby.Create("Test POST").
+	//	Post(URL+"/providers").
+	//	Send().
+	//	SetJson(regi).
+	//	ExpectStatus(404).
+	//AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+	//	})
 	//frisby.Create("Test POST").
 	//	Post("http://110.110.110.233:9009/Providers1@123we").
 	//	Send().
@@ -162,21 +162,31 @@ var URL string = (strings.Join(b,""))
 	//func main() {
 
 		Regi := "{username: swathi, password: atmecs@123}"
-		frisby.Create("Test successful registration").
+		frisby.Create("Testing the opestack details..").
 			Post(URL+"/providers/openstack").
 			SetJson(Regi).
 			Send().
 			ExpectStatus(200).
 			AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
 			})
+		//values := "{username: swathi, password: atmecs@123}"
+		frisby.Create("Testing the opestack details..").
+			Post(URL+"/providers/openstacks").
+			//SetJson(values).
+			Send().
+			ExpectStatus(404)
+			//AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+			//})
 	//Azure detalis...........................
+		regi := "{username: werty, password: atmecs@123}"
 		frisby.Create("Display the providers details of azure ").
 			Post(URL +"/providers/azure").
-    		//SetData("test_key", "test_value").
+			SetJson(regi).
 			Send().
-	 		ExpectStatus(200)
-
-		frisby.Create("Display the azure details(should fails in alphabatic character)").
+	 		ExpectStatus(200).
+		AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+			})
+		frisby.Create("Display the providers details of azure(should fails in alphabatic character)").
 			Post(URL +"/providers/azures").
 			Send().
 			ExpectStatus(404)
