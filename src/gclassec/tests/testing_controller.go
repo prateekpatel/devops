@@ -158,9 +158,7 @@ var URL string = (strings.Join(b,""))
 	//	Post("http://110.110.110.233:9009//providers").
 	//	Send().
 	//	ExpectStatus(301)
-
-	//func main() {
-
+	//openstack providers details.....................
 		Regi := "{username: swathi, password: atmecs@123}"
 		frisby.Create("Testing the opestack details..").
 			Post(URL+"/providers/openstack").
@@ -170,11 +168,17 @@ var URL string = (strings.Join(b,""))
 			AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
 			})
 		//values := "{username: swathi, password: atmecs@123}"
-		frisby.Create("Testing the opestack details..").
+		frisby.Create("Testing the opestack details..(should fails in the alphatic").
 			Post(URL+"/providers/openstacks").
 			//SetJson(values).
 			Send().
 			ExpectStatus(404)
+		frisby.Create("Testing the opestack details..(should fails in(/) ").
+			Post(URL+"/providers//openstacks").
+			//SetJson(values).
+			Send().
+			ExpectStatus(301)
+
 			//AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
 			//})
 	//Azure detalis...........................
