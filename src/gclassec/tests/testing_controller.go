@@ -9,13 +9,32 @@ import (
 	"strings"
 	"github.com/verdverm/frisby"
 	"runtime"
+	//"github.com/mozillazg/request"
+	"github.com/mozillazg/request"
+	//"reflect"
+
+	"github.com/bitly/go-simplejson"
 )
 
 type Configration struct {
 	Protocol string
 	Host     string
 	PortVal  string
+	//username string
+	//password string
+	//Resp *request.Response
 }
+type Request struct {
+	Resp *request.Response
+}
+type Frisby struct {
+
+}
+
+type Post int
+
+
+
 func main() {
 	//file, _ :=  os.Open("C:\\Git\\goclassec\\src\\gclassec\\conf\\controllertesting.json")
 	filename := "tests/testing_controller.go"
@@ -112,6 +131,55 @@ var URL string = (strings.Join(b,""))
 		Get(URL +"/dbaas/azureDetails/percentCPU/test/testGo").
 		Send().
 		ExpectStatus(404)
+	//vcenterDetail...................
+	frisby.Create("Display the list of  dynamic vcenter details ").
+		Get(URL +"/dbaas/vcenterDetail").
+		Send().
+		ExpectStatus(200)
+	frisby.Create("Display the list of  dynamic details of vcenterdetails (should fails in alphabatic character)").
+		Get(URL +"/dbaas/vcenterDetails").
+		Send().
+		ExpectStatus(404)
+	//providers post ...................................
+
+	regi := "{username: swathi, password: atmecs@123}"
+	frisby.Create("Test POST").
+		Post(URL+"/providers").
+		Send().
+		SetJson(regi).
+		ExpectStatus(200).
+	AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+		})
+	//frisby.Create("Test POST").
+	//	Post("http://110.110.110.233:9009/Providers1@123we").
+	//	Send().
+	//	ExpectStatus(404)
+	//frisby.Create("Test POST").
+	//	Post("http://110.110.110.233:9009//providers").
+	//	Send().
+	//	ExpectStatus(301)
+
+	//func main() {
+
+		Regi := "{username: swathi, password: atmecs@123}"
+		frisby.Create("Test successful registration").
+			Post(URL+"/providers/openstack").
+			SetJson(Regi).
+			Send().
+			ExpectStatus(200).
+			AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+			})
+	//Azure detalis...........................
+		frisby.Create("Display the providers details of azure ").
+			Post(URL +"/providers/azure").
+    		//SetData("test_key", "test_value").
+			Send().
+	 		ExpectStatus(200)
+
+		frisby.Create("Display the azure details(should fails in alphabatic character)").
+			Post(URL +"/providers/azures").
+			Send().
+			ExpectStatus(404)
 
 	frisby.Global.PrintReport()
 }
