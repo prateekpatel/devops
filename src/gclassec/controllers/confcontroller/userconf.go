@@ -8,6 +8,8 @@ import (
 	"bufio"
 	"runtime"
 	"strings"
+	"io/ioutil"
+	"bytes"
 )
 
 var redirectTarget string
@@ -111,7 +113,21 @@ func (uc UserController) ProviderHandler(w http.ResponseWriter, r *http.Request)
 
 func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Request) {
 	//host := r.FormValue("host")
-	c := map[string]string{
+
+	fmt.Printf("-------Response Body---------")
+
+	// Read the content
+	var bodyBytes []byte
+	if r.Body != nil {
+  		bodyBytes, _ = ioutil.ReadAll(r.Body)
+	}
+	// Restore the io.ReadCloser to its original state
+	r.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
+	// Use the content
+	bodyString := string(bodyBytes)
+	fmt.Println(bodyString)
+
+	/*c := map[string]string{
 		"host":       r.FormValue("host"),
 		"username":   r.FormValue("username"),
 		"password": r.FormValue("password"),
@@ -121,7 +137,7 @@ func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Reques
 		"imageregion": r.FormValue("imageregion"),
 		"controller": r.FormValue("controller")}
 
-  	outputjson,_:=json.Marshal(c)
+  	outputjson,_:=json.Marshal(c)*/
 
 	filename := "controllers/confcontroller/userconf.go"
        _, filePath, _, _ := runtime.Caller(0)
@@ -147,18 +163,30 @@ func (uc UserController) ProviderOpenstack(w http.ResponseWriter, r *http.Reques
   	filewriter:=bufio.NewWriter(f)
 
   	//write the JSON string. First we need to convert the outputjson to string, and then write it
-  	filewriter.WriteString(string(outputjson))
+  	//filewriter.WriteString(string(outputjson))
+	filewriter.WriteString(bodyString)
   	filewriter.Flush()
 }
 
 func (uc UserController) ProviderAzure(w http.ResponseWriter, r *http.Request) {
-	c := map[string]string{
+	/*c := map[string]string{
 		"clientid": r.FormValue("clientid"),
 		"clientsecret": r.FormValue("clientsecret"),
 		"subscriptionid": r.FormValue("subscriptionid"),
 		"tenantid": r.FormValue("tenantid")}
 
-	outputjson,_:=json.Marshal(c)
+	outputjson,_:=json.Marshal(c)*/
+
+	// Read the content
+	var bodyBytes []byte
+	if r.Body != nil {
+  		bodyBytes, _ = ioutil.ReadAll(r.Body)
+	}
+	// Restore the io.ReadCloser to its original state
+	r.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
+	// Use the content
+	bodyString := string(bodyBytes)
+	fmt.Println(bodyString)
 
 	filename := "controllers/confcontroller/userconf.go"
        _, filePath, _, _ := runtime.Caller(0)
@@ -178,6 +206,7 @@ func (uc UserController) ProviderAzure(w http.ResponseWriter, r *http.Request) {
   	filewriter:=bufio.NewWriter(f)
 
   	//write the JSON string. First we need to convert the outputjson to string, and then write it
-  	filewriter.WriteString(string(outputjson))
+  	//filewriter.WriteString(string(outputjson))
+	filewriter.WriteString(bodyString)
   	filewriter.Flush()
 }
