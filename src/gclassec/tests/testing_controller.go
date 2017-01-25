@@ -9,29 +9,25 @@ import (
 	"strings"
 	"github.com/verdverm/frisby"
 	"runtime"
-	//"github.com/mozillazg/request"
-	"github.com/mozillazg/request"
-	//"reflect"
 
 	"github.com/bitly/go-simplejson"
 )
-
 type Configration struct {
 	Protocol string
 	Host     string
-	PortVal  string
+	Port  string
 	//username string
 	//password string
 	//Resp *request.Response
 }
-type Request struct {
-	Resp *request.Response
-}
-type Frisby struct {
-
-}
-
-type Post int
+//type Request struct {
+//	Resp *request.Response
+//}
+//type Frisby struct {
+//
+//}
+//
+//type Post int
 
 
 
@@ -50,10 +46,10 @@ func main() {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Println(configration.PortVal)
+	fmt.Println(configration.Port)
 	Protocol := configration.Protocol
 	Host := configration.Host
-	PortVal := configration.PortVal
+	PortVal := configration.Port
 	//fmt.Println(Protocol)
 	//fmt.Println(Host)
 	//fmt.Println(PortVal)
