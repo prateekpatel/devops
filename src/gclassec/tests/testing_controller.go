@@ -9,29 +9,25 @@ import (
 	"strings"
 	"github.com/verdverm/frisby"
 	"runtime"
-	//"github.com/mozillazg/request"
-	"github.com/mozillazg/request"
-	//"reflect"
 
 	"github.com/bitly/go-simplejson"
 )
-
 type Configration struct {
 	Protocol string
 	Host     string
-	PortVal  string
+	Port  string
 	//username string
 	//password string
 	//Resp *request.Response
 }
-type Request struct {
-	Resp *request.Response
-}
-type Frisby struct {
-
-}
-
-type Post int
+//type Request struct {
+//	Resp *request.Response
+//}
+//type Frisby struct {
+//
+//}
+//
+//type Post int
 
 
 
@@ -50,10 +46,10 @@ func main() {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Println(configration.PortVal)
+	fmt.Println(configration.Port)
 	Protocol := configration.Protocol
 	Host := configration.Host
-	PortVal := configration.PortVal
+	PortVal := configration.Port
 	//fmt.Println(Protocol)
 	//fmt.Println(Host)
 	//fmt.Println(PortVal)
@@ -142,14 +138,14 @@ var URL string = (strings.Join(b,""))
 		ExpectStatus(404)
 	//providers post ...................................
 
-	regi := "{username: swathi, password: atmecs@123}"
-	frisby.Create("Test POST").
-		Post(URL+"/providers").
-		Send().
-		SetJson(regi).
-		ExpectStatus(200).
-	AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
-		})
+	//regi := "{username: swathi, password: atmecs@123}"
+	//frisby.Create("Test POST").
+	//	Post(URL+"/providers").
+	//	Send().
+	//	SetJson(regi).
+	//	ExpectStatus(404).
+	//AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+	//	})
 	//frisby.Create("Test POST").
 	//	Post("http://110.110.110.233:9009/Providers1@123we").
 	//	Send().
@@ -158,25 +154,39 @@ var URL string = (strings.Join(b,""))
 	//	Post("http://110.110.110.233:9009//providers").
 	//	Send().
 	//	ExpectStatus(301)
-
-	//func main() {
-
+	//openstack providers details.....................
 		Regi := "{username: swathi, password: atmecs@123}"
-		frisby.Create("Test successful registration").
+		frisby.Create("Testing the opestack details..").
 			Post(URL+"/providers/openstack").
 			SetJson(Regi).
 			Send().
 			ExpectStatus(200).
 			AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
 			})
+		//values := "{username: swathi, password: atmecs@123}"
+		frisby.Create("Testing the opestack details..(should fails in the alphatic").
+			Post(URL+"/providers/openstacks").
+			//SetJson(values).
+			Send().
+			ExpectStatus(404)
+		frisby.Create("Testing the opestack details..(should fails in(/) ").
+			Post(URL+"/providers//openstacks").
+			//SetJson(values).
+			Send().
+			ExpectStatus(301)
+
+			//AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+			//})
 	//Azure detalis...........................
+		regi := "{username: werty, password: atmecs@123}"
 		frisby.Create("Display the providers details of azure ").
 			Post(URL +"/providers/azure").
-    		//SetData("test_key", "test_value").
+			SetJson(regi).
 			Send().
-	 		ExpectStatus(200)
-
-		frisby.Create("Display the azure details(should fails in alphabatic character)").
+	 		ExpectStatus(200).
+		AfterJson(func(F *frisby.Frisby, json *simplejson.Json, err error) {
+			})
+		frisby.Create("Display the providers details of azure(should fails in alphabatic character)").
 			Post(URL +"/providers/azures").
 			Send().
 			ExpectStatus(404)
