@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"fmt"
 	"os"
-	"encoding/json"
 	"bufio"
 	"runtime"
 	"strings"
